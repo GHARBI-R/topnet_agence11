@@ -1,0 +1,42 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="dossier_list_view">
+      <field name="name">agence list</field>
+      <field name="model">agence.dossier</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="Nom"/>
+        </tree>
+      </field>
+    </record>
+
+      <record model="ir.ui.view" id="dossier_form_view">
+      <field name="name">agence list</field>
+      <field name="model">agence.dossier</field>
+      <field name="arch" type="xml">
+        <form>
+          <field name="Nom"/>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="agence_dossier_action_window">
+      <field name="name">Agences</field>
+      <field name="res_model">agence.dossier</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+      <menuitem name="Dossier"
+              id="agence_dossier_menu_cat"
+              parent="agence.menu_root"/>
+
+
+      <menuitem name="Liste des agences"
+             id="agence_dossier_list"
+             parent="agence_dossier_menu_cat"
+             action="agence_dossier_action_window"/>
+
+  </data>
+</odoo>
