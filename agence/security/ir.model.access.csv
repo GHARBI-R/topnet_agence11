@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_agence_agence,agence.agence,model_agence_agence,base.group_user,1,1,1,1
-access_agence_dossier,agence.dossier,model_agence_dossier,base.group_user,1,1,1,1

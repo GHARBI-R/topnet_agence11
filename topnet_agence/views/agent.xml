@@ -3,32 +3,30 @@
     <!-- explicit list view definition -->
 
     <record model="ir.ui.view" id="topnet_agence.list">
-      <field name="name">TopnetAgence list</field>
-      <field name="model">topnet_agence.topnet_agence</field>
+      <field name="name">TopnetAgent list</field>
+      <field name="model">agent.fiche</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="Nom"/>
+          <field name="nom"/>
             <field name="prenom"/>
-            <field name="Adresse"/>
+            <field name="adresse"/>
             <field name="naissance"/>
             <field name="num_cin_num_passeport"/>
             <field name="matricule"/>
             <field name="email"/>
-            <field name="Téléphone"/>
-            <field name="Rôle"/>
-            <field name="Agence" attrs="{'invisible': [('Rôle', 'in' ,('responsable agence', 'administrateur'))]}"
-                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"  />
+            <field name="telephone"/>
+            <field name="role"/>
+            <field name="agence"/>
         </tree>
       </field>
     </record>
--->
+
    <record model="ir.ui.view" id="topnet_agence.form">
       <field name="name">TopnetAgence form</field>
-      <field name="model">topnet_agence.topnet_agence</field>
+      <field name="model">agent.fiche</field>
       <field name="arch" type="xml">
         <form>
             <header>
-                <button name="action_confirm" type="object" string="Confirmer" class="oe_highlight"/>
                 <field name="state"  widget="statusbar"/>
             </header>
             <sheet>
@@ -41,7 +39,7 @@
                 </div>
             <group>
               <group >
-                <field name="Nom"/>
+                <field name="nom"/>
                 <field name="prenom" />
               </group>
               <group>
@@ -51,23 +49,24 @@
             <group>
                <group>
                  <field name="naissance"/>
-                 <field name="Adresse" placeholder="Rue...Ville..."/>
+                 <field name="adresse" placeholder="Rue...Ville..."/>
                  <field name="email" placeholder="abc@gmail.com" />
                </group>
                <group>
                  <field name="num_cin_num_passeport"/>
                  <field name="matricule"/>
-                 <field name="Téléphone"/>
+                 <field name="telephone"/>
                </group>
              </group>
               <group>
-               <field name="Rôle" placeholder="e.x Administrateur"/>
-               <field name="Agence"/>
+               <field name="role" placeholder="e.x Administrateur"/>
+               <field name="agence" attrs="{'invisible': [('role', '=' , 'responsable agence')]}"
+                                    options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"  />
 <!--               <field name="Agence_id" placeholder="Agence"/> -->
               </group>
               <notebook>
                 <page string="Contacts / Adresses">
-                  <field name="Nom"/>
+                  <field name="nom"/>
                 </page>
                 <page string="Notes internes">
                     Ajouter un note interne...
@@ -85,10 +84,10 @@
     <!-- actions opening views on models -->
       <record model="ir.ui.view" id="topnet_agence.search">
       <field name="name">TopnetAgence search</field>
-      <field name="model">topnet_agence.topnet_agence</field>
+      <field name="model">agent.fiche</field>
       <field name="arch" type="xml">
         <search>
-          <field name="Nom"/>
+          <field name="nom"/>
           <field name="prenom" />
           <field name="num_cin_num_passeport"/>
           <field name="matricule"/>
@@ -96,35 +95,23 @@
       </field>
     </record>
 
-    <record model="ir.actions.act_window" id="topnet_agence.action_window">
-      <field name="name">Utilisateurs</field>
-      <field name="res_model">topnet_agence.topnet_agence</field>
-      <field name="view_mode">tree,form</field>
+    <record model="ir.actions.act_window" id="agents_action_window">
+      <field name="name">Agents </field>
+      <field name="res_model">agent.fiche</field>
+      <field name="view_mode">kanban,form,tree</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Créer votre premier agent !
+          </p>
+        </field>
+      <field name="context">{}</field>
+      <field name="domain">[('role', '=', 'agent'),]</field>
     </record>
-
-
-
-
-    <!-- Top menu item -->
-
-    <menuitem name="TopnetAgence"
-              id="topnet_agence_menu_root"
-               sequence="10"/>
-
-    <!-- menu categories -->
-
-    <menuitem name="Gestion des Agents"
-              id="topnet_agence.menu_1"
-              parent="topnet_agence_menu_root"
-              sequence="10"/>
 
     <!-- actions -->
 
-    <menuitem name="Liste des agents"
-              id="topnet_agence.menu_1_list"
-              parent="topnet_agence.menu_1"
-              action="topnet_agence.action_window"
-              sequence="10"/>
+    <menuitem name="Espace Agents" id="espace_agent" parent="topnet_menu_root"/>
+    <menuitem name="Inscription" id="agent_topnet" parent="espace_agent" action="agents_action_window"/>
 
   </data>
 </odoo>
