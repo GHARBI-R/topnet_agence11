@@ -116,7 +116,7 @@
 
     <!-- menu Espace clients  -->
 
-    <menuitem name="Espace Client" id="espace_clt" parent="topnet_menu_root"/>
+    <menuitem name="Espace Client" id="espace_clt" parent="topnet_menu_root" sequence="10"/>
 
     <!-- actions -->
 
