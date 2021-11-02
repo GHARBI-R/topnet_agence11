@@ -59,10 +59,10 @@
                </group>
              </group>
               <group>
-               <field name="role" placeholder="e.x Administrateur"/>
-               <field name="agence" attrs="{'invisible': [('role', '=' , 'responsable agence')]}"
-                                    options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"  />
-<!--               <field name="Agence_id" placeholder="Agence"/> -->
+               <field name="role" placeholder="e.x Agent"/>
+<!--               <field name="agence" attrs="{'invisible': [('role', '=' , 'agent')]}"-->
+<!--                                    options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"  />-->
+<!--&lt;!&ndash;               <field name="Agence_id" placeholder="Agence"/> &ndash;&gt;-->
               </group>
               <notebook>
                 <page string="Contacts / Adresses">
@@ -104,14 +104,14 @@
             Créer votre premier agent !
           </p>
         </field>
-      <field name="context">{}</field>
-      <field name="domain">[('role', '=', 'agent'),]</field>
+<!--      <field name="context">{}</field>-->
+<!--      <field name="domain">[('role', '=', 'agent'),]</field>-->
     </record>
 
     <!-- actions -->
 
     <menuitem name="Espace Agents" id="espace_agent" parent="topnet_menu_root" sequence="20"/>
-    <menuitem name="Inscription" id="agent_topnet" parent="espace_agent" action="agents_action_window" sequence="20"/>
+    <menuitem name="Agents" id="agent_topnet" parent="espace_agent" action="agents_action_window" sequence="20"/>
 
   </data>
 </odoo>

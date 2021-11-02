@@ -95,12 +95,23 @@
         </form>
       </field>
     </record>
--->
+
+ <record id="topnet_client_search" model="ir.ui.view">
+        <field name="name">topnet.client.search</field>
+        <field name="model">client.fiche</field>
+        <field name="arch" type="xml">
+            <search string="Chercher un client">
+                <field name="name" filter_domain="['|',('name', 'ilike', self),('id_contrat', 'ilike', self)]"/>
+                <field name="id_contrat"/>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
 
     <!-- actions opening views on models -->
 
     <record model="ir.actions.act_window" id="fiche_action_window">
-      <field name="name">Inscription </field>
+      <field name="name">Inscription client</field>
       <field name="res_model">client.fiche</field>
       <field name="view_mode">kanban,form,tree</field>
         <field name="help" type="html">
@@ -115,13 +126,11 @@
       <menuitem name="Topnet" id="topnet_menu_root" sequence="-1"/>
 
     <!-- menu Espace clients  -->
-
     <menuitem name="Espace Client" id="espace_clt" parent="topnet_menu_root" sequence="10"/>
 
     <!-- actions -->
-
-    <menuitem name="Inscription" id="creation_clients" parent="espace_clt" action="fiche_action_window"/>
-      <menuitem name="Liste des clients " id="liste_clients" parent="espace_clt" action="fiche_action_window"/>
+    <menuitem name="Inscription Client " id="creation_clients" parent="espace_clt" action="fiche_action_window"/>
+    <menuitem name="Liste des clients " id="liste_clients" parent="espace_clt" action="fiche_action_window"/>
 
   </data>
 </odoo>

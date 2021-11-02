@@ -23,8 +23,8 @@
         'data/sequence.xml',
         'views/fiche_client.xml',
         'views/agent.xml',
-        'views/responsable_agence.xml',
-        'views/chef_agence.xml'
+       # 'views/responsable_agence.xml',
+        #'views/chef_agence.xml'
 
     ],
     'images': ['static/description/icon.png'],
