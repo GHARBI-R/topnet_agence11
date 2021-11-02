@@ -111,7 +111,7 @@
     <!-- actions -->
 
     <menuitem name="Espace Agents" id="espace_agent" parent="topnet_menu_root" sequence="20"/>
-    <menuitem name="Inscription" id="agent_topnet" parent="espace_agent" action="agents_action_window" sequence="1"/>
+    <menuitem name="Inscription" id="agent_topnet" parent="espace_agent" action="agents_action_window" sequence="20"/>
 
   </data>
 </odoo>

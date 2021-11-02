@@ -110,8 +110,8 @@
 
     <!-- actions -->
 
-    <menuitem name="Espace Agents" id="espace_agent" parent="topnet_menu_root"/>
-    <menuitem name="responsable agence" id="agent_topnet" parent="espace_agent" action="agents_action_window" sequence="3"/>
+    <menuitem name="Espace Agents" id="espace_agent" parent="topnet_menu_root" sequence="20"/>
+    <menuitem name="responsable agence" id="agent_topnet" parent="espace_agent" action="agents_action_window" sequence="20"/>
 
   </data>
 </odoo>

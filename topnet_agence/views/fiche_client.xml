@@ -120,7 +120,8 @@
 
     <!-- actions -->
 
-    <menuitem name="Inscription" id="liste_abonnements_FO" parent="espace_clt" action="fiche_action_window"/>
+    <menuitem name="Inscription" id="creation_clients" parent="espace_clt" action="fiche_action_window"/>
+      <menuitem name="Liste des clients " id="liste_clients" parent="espace_clt" action="fiche_action_window"/>
 
   </data>
 </odoo>
