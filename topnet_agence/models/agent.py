@@ -6,8 +6,9 @@ class Agent(models.Model):
     _name = 'agent.fiche'
     _description = 'fiche agent'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _rec_name = 'nom'
 
-    user_id = fields.Many2one('res.user',
+    user_id = fields.Many2one('res.users',
                               ondelete='set null', string="User", index=True)
     nom = fields.Char(string="Nom", required=True)
     prenom = fields.Char(string="Prenom", required=True)

@@ -19,20 +19,25 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button name="action_depot" type="object" string="Déposer"  class="oe_highlight"
-                                states="suivi"/>
-                        <button name="action_suivi" type="object" string="Suivi" class="oe_highlight"
-                                attrs="{'invisible': [('state','!=', 'dossier')]}"/>
 
-                        <field name="state" widget="statusbar" statusbar_visible="dossier, suivi" options="{'clickable':1}"/>
+                        <button name="action_depot" type="object" string="Déposer" class="oe_highlight"
+                                states="nouveau"/>
+                         <button name="action_valider" type="object" string="validé" class="oe_highlight"
+                                states="valider" />
+<!--                         <button name="action_non_valider" type="object" string="non validé" class="oe_highlight"-->
+<!--                                states="non_valide" groups="topnet_agence.agent"/>-->
+
+
+
+                        <field name="state" widget="statusbar" statusbar_visible="nouveau, dossier, valider, non_valide"
+                               options="{'clickable':0}"/>
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-                            <button name="toggle_active" type="object"
-                                    class="oe_stat_button" icon="fa-archive">
-                                <field name="active" widget="boolean_button"
-                                       options='{"terminology": "archive"}'/>
-                            </button>
+<!--                            <button name="depot_dossier" class="oe_stat_button" type="object"-->
+<!--                                    icon="fa-pencil-square-o">-->
+<!--                                <field string="Déposer dossier" name="depot" widget="statinfo"/>-->
+<!--                            </button>-->
                         </div>
                         <div class="oe_title">
                             <h1>
@@ -73,6 +78,8 @@
                                 <field name="postale2"/>
                                 <field name="tel2"/>
                                 <field name="fax2"/>
+
+
                             </group>
 
                         </group>

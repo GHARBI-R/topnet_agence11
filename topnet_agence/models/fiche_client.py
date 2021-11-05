@@ -18,13 +18,31 @@ class Clients(models.Model):
         ('email_pri_uniq', 'unique(email_pri)', 'Email existe déja'),
     ]
 
+    # @api.multi
+    # def depot_dossier(self):
+    #     return {
+    #         'name': _('depot'),
+    #         'domain': [],
+    #         'view_type': 'form',
+    #         'res_model': 'agent.fiche',
+    #         'view_id': False,
+    #         'view_mode': 'tree,form',
+    #         'type': 'ir.actions.act_window',
+    #     }
+
     def action_depot(self):
         for rec in self:
             rec.state = 'dossier'
 
-    def action_suivi(self):
+    def action_valider(self):
         for rec in self:
-            rec.state = 'suivi'
+            rec.state = 'valide'
+
+    def action_non_valider(self):
+        for rec in self:
+            rec.state = 'non_valide'
+
+
 
     id_contrat = fields.Char(string='Numéro contrat', required=True, copy=False, readonly=True,
                              index=True, default=lambda self: _('New'))
@@ -65,11 +83,14 @@ class Clients(models.Model):
         [('Fibre Optique', 'Fibre Optique'), ('Voip Access', 'Voip Access'), ('Rapido Pro', 'Rapido Pro')],
         default="Fibre Optique")
     debit = fields.Selection([("20", "20"), ("30", "30"), ("50", "50"), ("100", "100")], default="20")
-    active = fields.Boolean(string="Active", default="Ture")
+    active = fields.Boolean(string="Active", default="True")
+
     state = fields.Selection([
+        ('nouveau', 'Nouveau'),
         ('dossier', 'Dépot Dossier'),
-        ('suivi', 'Suivi Dossier'),
-    ], string='Status', readonly=True, default='dossier')
+        ('valider', 'Valider'),
+        ('non_valide', 'Non validé'),
+    ], string='Status', readonly=True, default='nouveau')
 
     @api.model
     def create(self, vals):
@@ -105,8 +126,6 @@ class Clients(models.Model):
             elif len(self.nom_tech) > 20:
                 raise ValidationError(_('Nom Technique trop long'))
 
-
-
     @api.constrains('email_admi', 'email_tech', 'email_pri')
     def validate_email(self):
         for obj in self:
@@ -118,4 +137,3 @@ class Clients(models.Model):
                 raise ValidationError("Vérifier votre adresse mail technique : %s" % obj.email_tech)
 
         return True
-
