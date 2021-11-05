@@ -19,7 +19,7 @@ class Clients(models.Model):
     ]
 
     # @api.multi
-    # def depot_dossier(self):
+    # def action_depot(self):
     #     return {
     #         'name': _('depot'),
     #         'domain': [],
@@ -29,20 +29,26 @@ class Clients(models.Model):
     #         'view_mode': 'tree,form',
     #         'type': 'ir.actions.act_window',
     #     }
-
+    #
     def action_depot(self):
         for rec in self:
             rec.state = 'dossier'
 
     def action_valider(self):
         for rec in self:
-            rec.state = 'valide'
+            rec.state = 'valider'
 
     def action_non_valider(self):
         for rec in self:
-            rec.state = 'non_valide'
+            rec.state = 'non_valider'
 
+    state = fields.Selection([
+        ('nouveau', 'Nouveau'),
+        ('valider', 'Valide'),
+        ('non_valider', 'Non valide'),
+        ('dossier', 'Dépot Dossier'),
 
+    ], string='Status', readonly=True, default='nouveau')
 
     id_contrat = fields.Char(string='Numéro contrat', required=True, copy=False, readonly=True,
                              index=True, default=lambda self: _('New'))
@@ -85,12 +91,7 @@ class Clients(models.Model):
     debit = fields.Selection([("20", "20"), ("30", "30"), ("50", "50"), ("100", "100")], default="20")
     active = fields.Boolean(string="Active", default="True")
 
-    state = fields.Selection([
-        ('nouveau', 'Nouveau'),
-        ('dossier', 'Dépot Dossier'),
-        ('valider', 'Valider'),
-        ('non_valide', 'Non validé'),
-    ], string='Status', readonly=True, default='nouveau')
+
 
     @api.model
     def create(self, vals):

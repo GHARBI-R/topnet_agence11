@@ -1,4 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
 access_client_fiche,access.client.fiche,model_client_fiche,base.group_user,1,1,1,1
 access_agent_fiche,access.agent.fiche,model_agent_fiche,base.group_user,1,1,1,1
 access_topnet_dossier,access.topnet.dossier,model_topnet_dossier,base.group_user,1,1,1,1

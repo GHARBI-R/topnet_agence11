@@ -18,7 +18,7 @@
 
     # always loaded
     'data': [
-        'security/security.xml'
+        # 'security/security.xml'
         'security/ir.model.access.csv',
         'data/sequence.xml',
         'views/fiche_client.xml',
