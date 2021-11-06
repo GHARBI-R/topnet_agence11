@@ -25,6 +25,7 @@
         'views/agent.xml',
         'views/dossier.xml',
         # 'views/user.xml',
+        'views/website_menu.xml',
 
     ],
     'images': ['static/description/icon.png'],
