@@ -19,22 +19,23 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button name="action_depot" type="object" string="Déposer" class="btn-primary"/>
+
                          <button name="action_valider" type="object" string="validé" class="oe_highlight"/>
                          <button name="action_non_valider" type="object" string="non validé" class="oe_highlight"/>
 
+
 <!--&lt;!&ndash;                                 groups="topnet_agence.agent"&ndash;&gt;-->
 
-                        <field name="state" widget="statusbar" statusbar_visible="nouveau,dossier,valider,non_valider"
+                        <field name="state" widget="statusbar" statusbar_visible="nouveau,valider,non_valider,dossier"
                                options="{'clickable':0}"/>
                     </header>
                     <sheet>
-<!--                        <div class="oe_button_box" name="button_box">-->
-                        <!--                            <button name="depot_dossier" class="oe_stat_button" type="object"-->
-                        <!--                                    icon="fa-pencil-square-o">-->
-                        <!--                                <field string="Déposer dossier" name="depot" widget="statinfo"/>-->
-                        <!--                            </button>-->
-                        <!--                        </div>-->
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_depot" class="oe_stat_button" type="object" string="Déposer "
+                                    icon="fa-pencil-square-o">
+<!--                                <field string="Déposer dossier" name="dossier_lines" widget="statinfo"/>-->
+                            </button>
+                        </div>
                         <div class="oe_title">
                             <h1>
                                 <field name="id_contrat" readonly="1"/>

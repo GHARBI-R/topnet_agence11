@@ -12,6 +12,7 @@ class Topnet_dossier(models.Model):
     doc2 = fields.Image(string="CIN gérant", max_width=90, max_height=90, verify_resolution=True, required=True)
     doc3 = fields.Image(string="Contrat TOPNET", max_width=90, max_height=90, verify_resolution=True, required=True)
     doc4 = fields.Image(string="Contrat TT", max_width=90, max_height=90, verify_resolution=True, required=True)
+    dossier_id = fields.Many2one('client.fiche', string='Dossier')
 
 
 

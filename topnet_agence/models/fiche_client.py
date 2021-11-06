@@ -21,10 +21,10 @@ class Clients(models.Model):
     # @api.multi
     # def action_depot(self):
     #     return {
-    #         'name': _('depot'),
+    #         'name': _('Déposer dossier'),
     #         'domain': [],
     #         'view_type': 'form',
-    #         'res_model': 'agent.fiche',
+    #         'res_model': 'topnet.dossier',
     #         'view_id': False,
     #         'view_mode': 'tree,form',
     #         'type': 'ir.actions.act_window',
@@ -90,6 +90,9 @@ class Clients(models.Model):
         default="Fibre Optique")
     debit = fields.Selection([("20", "20"), ("30", "30"), ("50", "50"), ("100", "100")], default="20")
     active = fields.Boolean(string="Active", default="True")
+
+    dossier_lines = fields.One2many('topnet.dossier', 'dossier_id', string='Dossiers')
+
 
 
 
