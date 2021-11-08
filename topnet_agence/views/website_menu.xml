@@ -1,17 +1,17 @@
 <odoo>
   <data>
 
-    <!-- Menu bouton Ajout utilisateur -->
+    <!-- Menu bouton  utilisateur -->
     <record id="menu_user" model="website.menu">
-      <field name="name">Créer un utilisateur</field>
+      <field name="name">Espace utilisateur</field>
 <!--      <field name="url">/adduser_form</field>-->
       <field name="parent_id" ref="website.main_menu" />
       <field name="sequence" type="int">11</field>
     </record>
 
-    <!-- Menu bouton Ajout Demande FO -->
-    <record id="menu_subscription" model="website.menu">
-      <field name="name">Demande de Souscription FO</field>
+    <!-- Menu bouton Ajout client-->
+    <record id="menu_client" model="website.menu">
+      <field name="name">Espaces clients</field>
 <!--      <field name="url">/addsubscription_form</field>-->
       <field name="parent_id" ref="website.main_menu" />
       <field name="sequence" type="int">22</field>

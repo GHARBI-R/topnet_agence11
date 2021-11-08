@@ -20,11 +20,11 @@
                 <form>
                     <header>
 
-                         <button name="action_valider" type="object" string="validé" class="oe_highlight"/>
-                         <button name="action_non_valider" type="object" string="non validé" class="oe_highlight"/>
+                         <button name="action_valider" type="object" string="validé" class="oe_highlight" groups="topnet_agence.group_topnet_agent"/>
+                         <button name="action_non_valider" type="object" string="non validé" class="oe_highlight" groups="topnet_agence.group_topnet_agent"/>
 
 
-<!--&lt;!&ndash;                                 groups="topnet_agence.agent"&ndash;&gt;-->
+
 
                         <field name="state" widget="statusbar" statusbar_visible="nouveau,valider,non_valider,dossier"
                                options="{'clickable':0}"/>
