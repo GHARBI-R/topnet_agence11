@@ -5,40 +5,47 @@
         <record model="ir.module.category" id="module_category_topnet">
             <field name="name">Topnet Management</field>
             <field name="description">Category For actors</field>
-<!--            <field name="sequence">45</field>-->
-        </record>
 
+        </record>
+                   <!--groupe des clients -->
         <record id="group_topnet_client" model="res.groups">
             <field name="name">Client</field>
             <field name="category_id" ref="module_category_topnet"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
         </record>
-
+<!--groupe des agents -->
         <record id="group_topnet_agent" model="res.groups">
             <field name="name">Agent</field>
             <field name="category_id" ref="module_category_topnet"/>
+            <field name="implied_ids" eval="[(4, ref('module_category_topnet'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         </record>
 
-
+<!--groupe des chefs d'agence -->
         <record id="group_topnet_chef" model="res.groups">
             <field name="name">Chef d'agence</field>
             <field name="category_id" ref="module_category_topnet"/>
+            <field name="implied_ids" eval="[(4, ref('module_category_topnet'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         </record>
-
+<!--groupe des responsables agences -->
         <record id="group_topnet_responsable" model="res.groups">
             <field name="name">Responsable agence</field>
             <field name="category_id" ref="module_category_topnet"/>
+            <field name="implied_ids" eval="[(4, ref('module_category_topnet'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         </record>
-
-    <record model="ir.rule" id="id_rule_client">
-        <field name="name">See His Lab Only</field>
-        <field name="model_id" ref="model_client.fiche"/>
-        <field name="domain_force">[('id_contrat','=',id_contrat)]</field>
-        <field name="groups" eval="[(4, ref('group_topnet_client'))]"/>
-        <field name="perm_create" eval="1"/>
-        <field name="perm_write" eval="1"/>
-        <field name="perm_unlink" eval="1"/>
-        <field name="perm_read" eval="1"/>
-    </record>
+<!--attribution des rôles  -->
+        <record model="ir.rule" id="id_rule_client">
+            <field name="name">See His Lab Only</field>
+            <field name="model_id" ref="model_client.fiche"/>
+            <field name="domain_force">[('id_contrat','=',id_contrat)]</field>
+            <field name="groups" eval="[(4, ref('group_topnet_client'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
 
     </data>
 </odoo>
