@@ -50,7 +50,9 @@
                             <group>
                                 <field name="naissance"/>
                                 <field name="adresse" placeholder="Rue...Ville..."/>
-                                <field name="email" placeholder="abc@gmail.com"/>
+                                <field name="email"/>
+                                <field name="mot_passe" password="True" />
+                                <field name="c_mot_passe" password="True" />
                             </group>
                             <group>
                                 <field name="num_cin_num_passeport"/>
@@ -72,6 +74,9 @@
                         <notebook>
                             <page string="Contacts / Adresses">
                                 <field name="nom"/>
+                                <field name="prenom"/>
+                                <field name="matricule"/>
+                                <field name="role"/>
                             </page>
                             <page string="Notes internes">
                                 Ajouter un note interne...
