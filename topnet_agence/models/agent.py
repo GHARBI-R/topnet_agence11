@@ -9,6 +9,7 @@ class Agent(models.Model):
     _rec_name = 'nom'
 
     user_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
+    agent_id = fields.Many2one('agent.fiche', ondelete='set null', string="agent", index=True)
     nom = fields.Char(string="Nom", required=True)
     prenom = fields.Char(string="Prenom", required=True)
     adresse = fields.Char(string="Adresse", required=True)
