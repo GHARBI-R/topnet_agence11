@@ -31,7 +31,7 @@
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-                            <button name="action_depot" class="oe_stat_button" type="action" string="Déposer "
+                            <button name="action_depot" class="oe_stat_button" type="object" string="Déposer "
                                     icon="fa-pencil-square-o">
 <!--                                <field string="Déposer dossier" name="dossier_lines" widget="statinfo"/>-->
                             </button>

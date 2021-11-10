@@ -52,7 +52,7 @@ class Clients(models.Model):
 
     id_contrat = fields.Char(string='Numéro contrat', required=True, copy=False, readonly=True,
                              index=True, default=lambda self: _('New'))
-    name = fields.Char(string="Nom et Prénom du gérant")
+    name = fields.Char(string="Nom et Prénom du gérant", track_visibility="always")
     cin_pass = fields.Integer(string="Numéro CIN/Passeport")
     raison = fields.Char(string="Raison sociale")
     registre = fields.Char(string="Registre de commerce")
@@ -91,7 +91,7 @@ class Clients(models.Model):
     debit = fields.Selection([("20", "20"), ("30", "30"), ("50", "50"), ("100", "100")], default="20")
     active = fields.Boolean(string="Active", default="True")
 
-    # dossier_lines = fields.One2many('topnet.dossier', 'dossier_id', string='Dossiers')
+    dossier_lines = fields.One2many('topnet.dossier', 'dossier_id', string='Dossiers')
 
 
 
