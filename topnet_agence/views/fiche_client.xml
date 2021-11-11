@@ -20,12 +20,10 @@
                 <form>
                     <header>
 
-                         <button name="action_valider" type="object" string="validé" class="oe_highlight" groups="topnet_agence.group_topnet_agent"/>
-                         <button name="action_non_valider" type="object" string="non validé" class="oe_highlight" groups="topnet_agence.group_topnet_agent"/>
-
-
-
-
+                        <button name="action_valider" type="object" string="validé" class="oe_highlight"
+                                groups="topnet_agence.group_topnet_agent"/>
+                        <button name="action_non_valider" type="object" string="non validé" class="oe_highlight"
+                                groups="topnet_agence.group_topnet_agent"/>
                         <field name="state" widget="statusbar" statusbar_visible="nouveau,valider,non_valider,dossier"
                                options="{'clickable':0}"/>
                     </header>
@@ -33,7 +31,7 @@
                         <div class="oe_button_box" name="button_box">
                             <button name="action_depot" class="oe_stat_button" type="object" string="Déposer "
                                     icon="fa-pencil-square-o">
-<!--                                <field string="Déposer dossier" name="dossier_lines" widget="statinfo"/>-->
+                                <!--  <field string="Déposer dossier" name="dossier_lines" widget="statinfo"/>-->
                             </button>
                         </div>
                         <div class="oe_title">

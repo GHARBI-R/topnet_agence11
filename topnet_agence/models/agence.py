@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class topnet_agence(models.Model):
@@ -22,8 +24,16 @@ class topnet_agence(models.Model):
                                ("Topnet Agence Sfax", "Topnet Agence Sfax"),
                                ("Topnet Agence Taib Mhiri Sfax", "Topnet Agence Taib Mhiri Sfax"),
                                ("Topnet Agence El Mourouj", "Topnet Agence El Mourouj"),
-                               ("Topnet Agence Gabes", "Topnet Agence Gabes")])
+                               ("Topnet Agence Gabes", "Topnet Agence Gabes")], required=True)
 
     Delegation= fields.Selection([("ariana", "Ariana"), ("beja", "Béja"), ("ben_Arous", "Ben Arous"), ("bizerte", "Bizerte"), ("gabes", "Gabés"), ("gafsa", "Gafsa"), ("jendouba", "Jendouba"), ("kairouan", "Kairouan"), ("kasserine", "Kasserine"), ("kébili", "Kébili"), ("le_Kef", "Le Kef"), ("mahdia", "Mahdia"), ("la_Manouba", "La Manouba"), ("mednine", "Médenine"), ("monastir", "Monastir"), ("nabeul", "Nabeul"), ("sfax", "Sfax"), ("sidi_Bouzid", "Sidi Bouzid"), ("siliana", "Siliana"), ("sousse", "Sousse"), ("tataouine", "Tataouine"), ("tozeur", "Tozeur"), ("tunis", "Tunis"), ("zaghouan", "Zaghouan")], required=True, string="Delegation")
     Adresse = fields.Char(string="Adresse", required=True)
-    Fax = fields.Integer(string="Fax")
+    Fax = fields.Integer(string="Fax", required=True)
+
+    @api.constrains('Adresse', 'Fax')
+    def check_name(self):
+        for rec in self:
+            if len(str(abs(self.Fax))) != 8:
+                raise ValidationError(_('Numéro de fax doit contenir seulement 8 chiffres'))
+            elif len(self.Adresse) > 20:
+                raise ValidationError(_('Adresse  trop longue'))

@@ -18,21 +18,17 @@ class Clients(models.Model):
         ('email_pri_uniq', 'unique(email_pri)', 'Email existe déja'),
     ]
 
-    # @api.multi
-    # def action_depot(self):
-    #     return {
-    #         'name': _('Déposer dossier'),
-    #         'domain': [],
-    #         'view_type': 'form',
-    #         'res_model': 'topnet.dossier',
-    #         'view_id': False,
-    #         'view_mode': 'tree,form',
-    #         'type': 'ir.actions.act_window',
-    #     }
-    #
+
     def action_depot(self):
-        for rec in self:
-            rec.state = 'dossier'
+        return {
+            'name': _('Déposer'),
+            'domain': [],
+            'view_type': 'form',
+            'res_model': 'topnet.dossier',
+            'view_id': False,
+            'view_mode': 'tree,form',
+            'type': 'ir.actions.act_window',
+        }
 
     def action_valider(self):
         for rec in self:
@@ -103,14 +99,13 @@ class Clients(models.Model):
         result = super(Clients, self).create(vals)
         return result
 
-    @api.constrains('name', 'cin_pass', 'tel', 'fax', 'tel2', 'fax2', 'Tel_admi', 'gsm_admi', 'nom_tech', 'tel_tech',
+    @api.constrains('name', 'tel', 'fax', 'tel2', 'fax2', 'Tel_admi', 'gsm_admi', 'nom_tech', 'tel_tech',
                     'gsm_tech')
     def check_name(self):
         for rec in self:
             if len(str(abs(self.tel))) != 8:
                 raise ValidationError(_('Numéro de tel doit contenir seulement 8 chiffres'))
-            elif len(str(abs(self.cin_pass))) != 8:
-                raise ValidationError(_('Nméro de cin / passeport doit contenir seulement 8 chiffres'))
+
             elif len(str(abs(self.fax))) != 8:
                 raise ValidationError(_('Nméro de fax doit contenir seulement 8 chiffres'))
             elif len(str(abs(self.tel2))) != 8:

@@ -1,5 +1,7 @@
-# -*- coding: utf-8 -*-
-from odoo import models, fields, api
+
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
+import re
 
 
 class Agent(models.Model):
@@ -7,6 +9,12 @@ class Agent(models.Model):
     _description = 'fiche agent'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = 'nom'
+
+    _sql_constraints = [
+        ('cin_pass_uniq', 'unique(email)', 'Numero de cin/passeport existe déja'),
+        ('email_uniq', 'unique(email)', 'Email existe déja'),
+        ('matricule_uniq', 'unique(matricule)', 'matricule existe déja'),]
+
 
     user_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
     agent_id = fields.Many2one('agent.fiche', ondelete='set null', string="agent", index=True)
@@ -33,6 +41,25 @@ class Agent(models.Model):
         ('disponible', 'Disponible'),
         ('abscent', 'Abscent'),
     ], string='Status', readonly=True, default='disponible')
+
+    @api.constrains('name', 'telephone', 'mot_passe', 'c_mot_passe')
+    def check_name(self):
+        for rec in self:
+            if len(str(abs(self.telephone))) != 8:
+                raise ValidationError(_('Numéro de tel doit contenir seulement 8 chiffres'))
+            elif (self.mot_passe) != (self.c_mot_passe):
+                raise ValidationError(_('mot de passe et confirmation mot de passe doivent être identique '))
+            elif len(self.nom) > 20:
+                raise ValidationError(_('Nom  trop long'))
+
+    @api.constrains('email')
+    def validate_email(self):
+        for obj in self:
+            if re.match("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$", obj.email) == None:
+                raise ValidationError("Vérifier votre adresse mail principale : %s" % obj.email)
+
+
+        return True
 
     @api.model
     def create(self, values):
