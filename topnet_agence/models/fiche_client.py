@@ -18,18 +18,6 @@ class Clients(models.Model):
         ('email_pri_uniq', 'unique(email_pri)', 'Email existe déja'),
     ]
 
-
-    def action_depot(self):
-        return {
-            'name': _('Déposer'),
-            'domain': [],
-            'view_type': 'form',
-            'res_model': 'topnet.dossier',
-            'view_id': False,
-            'view_mode': 'tree,form',
-            'type': 'ir.actions.act_window',
-        }
-
     def action_valider(self):
         for rec in self:
             rec.state = 'valider'
@@ -37,6 +25,24 @@ class Clients(models.Model):
     def action_non_valider(self):
         for rec in self:
             rec.state = 'non_valider'
+
+    @api.depends('state')
+    def action_depot(self):
+        # for rec in self:
+        #     rec.state = 'dossier'
+        for rec in self:
+            if rec.state == 'valider':
+               return {
+                  'name': _('Déposer'),
+                  'domain': [],
+                  'view_type': 'form',
+                  'res_model': 'topnet.dossier',
+                  'view_id': False,
+                  'view_mode': 'tree,form',
+                  'type': 'ir.actions.act_window',
+                  }
+
+
 
     state = fields.Selection([
         ('nouveau', 'Nouveau'),
@@ -87,7 +93,7 @@ class Clients(models.Model):
     debit = fields.Selection([("20", "20"), ("30", "30"), ("50", "50"), ("100", "100")], default="20")
     active = fields.Boolean(string="Active", default="True")
 
-    dossier_lines = fields.One2many('topnet.dossier', 'dossier_id', string='Dossiers')
+    # dossier_lines = fields.One2many('topnet.dossier', 'dossier_id', string='Dossiers')
 
 
 
