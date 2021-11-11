@@ -28,9 +28,7 @@ class Clients(models.Model):
 
     @api.depends('state')
     def action_depot(self):
-        # for rec in self:
-        #     rec.state = 'dossier'
-        for rec in self:
+         for rec in self:
             if rec.state == 'valider':
                return {
                   'name': _('Déposer'),
@@ -41,6 +39,8 @@ class Clients(models.Model):
                   'view_mode': 'tree,form',
                   'type': 'ir.actions.act_window',
                   }
+            for rec in self:
+                rec.state = 'dossier'
 
 
 
