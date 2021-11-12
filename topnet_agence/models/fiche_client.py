@@ -94,7 +94,8 @@ class Clients(models.Model):
     active = fields.Boolean(string="Active", default="True")
 
     # dossier_lines = fields.One2many('topnet.dossier', 'dossier_id', string='Dossiers')
-
+    dossier_id = fields.Many2one('topnet.dossier', string='Related Dossier')
+    related_dossier_id = fields.Many2one('topnet.dossier', string='Dossier')
 
 
 

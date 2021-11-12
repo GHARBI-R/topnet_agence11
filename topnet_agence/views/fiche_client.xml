@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <tree string="Clients">
                     <field name="name"/>
-                    <field name="id_contrat"/>
+                    <field name="related_dossier_id"/>
                 </tree>
             </field>
         </record>
@@ -38,7 +38,11 @@
                             <h1>
                                 <field name="id_contrat" readonly="1"/>
                             </h1>
+                            <group>
+                                <field name="related_dossier_id" options="{'no_create': True, 'no_open': False}"/>
+                            </group>
                         </div>
+
                         <group>
                             <group string="Informations personnels">
                                 <field name="name"/>
@@ -63,6 +67,7 @@
 
 
                             <group string="Adresse et coordonnées">
+
                                 <field name="correspondance"/>
                                 <field name="Ville"/>
                                 <field name="postale"/>
@@ -79,7 +84,7 @@
 
                         </group>
                         <notebook>
-                            <page string="Contact Administratif et Financiers">
+                            <page string=" Contact Administratif et Financiers">
                                 <group>
                                     <field name="nom"/>
                                     <field name="Tel_admi"/>

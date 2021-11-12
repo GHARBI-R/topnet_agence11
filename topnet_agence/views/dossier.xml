@@ -8,6 +8,7 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="id_contrat"/>
+                    <field name="id_dossier"/>
                     <field name="doc1"/>
                     <field name="doc2"/>
                     <field name="doc3"/>
@@ -30,12 +31,14 @@
                         <group>
                             <group>
                                 <field name="id_contrat"/>
+                                <field name="id_dossier"/>
                                 <field name="doc1"/>
                                 <field name="doc2"/>
 
                             </group>
                             <group>
-                                <field name="contrat_tt"  widget="static/description/contrat.jpg" readonly="0" force_save="1"/>
+                                <field name="contrat_tt" widget="static/description/contrat.jpg" readonly="0"
+                                       force_save="1"/>
                                 <field name="doc3"/>
                                 <field name="doc4"/>
                             </group>
@@ -74,8 +77,8 @@
 
         <!-- actions -->
 
-        <menuitem name="dossier" id="espace_dossier" parent="topnet_menu_root" sequence="40"/>
-        <menuitem name="dossier" id="dossier_topnet" parent="espace_dossier" action="dossier_action_window"
+        <menuitem name="Dossier" id="espace_dossier" parent="topnet_menu_root" sequence="40"/>
+        <menuitem name="Dossier" id="dossier_topnet" parent="espace_dossier" action="dossier_action_window"
                   sequence="40"/>
 
     </data>
