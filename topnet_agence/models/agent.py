@@ -11,13 +11,13 @@ class Agent(models.Model):
     _rec_name = 'nom'
 
     _sql_constraints = [
-        ('cin_pass_uniq', 'unique(email)', 'Numero de cin/passeport existe déja'),
+        ('cin_pass_uniq', 'unique(num_cin_num_passeport)', 'Numero de cin/passeport existe déja'),
         ('email_uniq', 'unique(email)', 'Email existe déja'),
         ('matricule_uniq', 'unique(matricule)', 'matricule existe déja'),]
 
 
-    user_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
-    agent_id = fields.Many2one('agent.fiche', ondelete='set null', string="agent", index=True)
+    agent_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
+    # agent_id = fields.Many2one('agent.fiche', ondelete='set null', string="agent", index=True)
     nom = fields.Char(string="Nom", required=True)
     prenom = fields.Char(string="Prenom", required=True)
     adresse = fields.Char(string="Adresse", required=True)
@@ -69,8 +69,8 @@ class Agent(models.Model):
             'password': values.get('mot_passe'),
             # other required field
         }
-        user_id = self.env['res.users'].sudo().create(vals_user)
-        values.update(user_id=user_id.id)
+        agent_id = self.env['res.users'].sudo().create(vals_user)
+        values.update(agent_id=agent_id.id)
         res = super(Agent, self).create(values)
 
         return res

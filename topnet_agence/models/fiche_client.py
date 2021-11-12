@@ -55,6 +55,8 @@ class Clients(models.Model):
     id_contrat = fields.Char(string='Numéro contrat', required=True, copy=False, readonly=True,
                              index=True, default=lambda self: _('New'))
 
+    client_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
+    role = fields.Char(string="role", default="Client")
     name = fields.Char(string="Nom et Prénom du gérant", track_visibility="always")
     cin_pass = fields.Integer(string="Numéro CIN/Passeport")
     email_pri = fields.Char(string="Email principale")
@@ -145,3 +147,16 @@ class Clients(models.Model):
                 raise ValidationError("Vérifier votre adresse mail technique : %s" % obj.email_tech)
 
         return True
+    @api.model
+    def create(self, values):
+        vals_user = {
+            'name': values.get('name'),
+            'login': values.get('email_pri'),
+            'password': values.get('mot_passe'),
+            # other required field
+        }
+        user_id = self.env['res.users'].sudo().create(vals_user)
+        values.update(user_id=user_id.id)
+        res = super(Clients, self).create(values)
+
+        return res
