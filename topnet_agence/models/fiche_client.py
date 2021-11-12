@@ -12,7 +12,7 @@ class Clients(models.Model):
     _rec_name = 'name'
 
     _sql_constraints = [
-        ('cin_pass_uniq', 'unique(email)', 'Numero de cin/passeport existe déja'),
+        ('cin_pass_uniq', 'unique(cin_pass)', 'Numero de cin/passeport existe déja'),
         ('email_admi_uniq', 'unique(email_admi)', 'Email existe déja'),
         ('email_tech_uniq', 'unique(email_tech)', 'Email existe déja'),
         ('email_pri_uniq', 'unique(email_pri)', 'Email existe déja'),
@@ -54,8 +54,10 @@ class Clients(models.Model):
 
     id_contrat = fields.Char(string='Numéro contrat', required=True, copy=False, readonly=True,
                              index=True, default=lambda self: _('New'))
+
     name = fields.Char(string="Nom et Prénom du gérant", track_visibility="always")
     cin_pass = fields.Integer(string="Numéro CIN/Passeport")
+    email_pri = fields.Char(string="Email principale")
     raison = fields.Char(string="Raison sociale")
     registre = fields.Char(string="Registre de commerce")
     tva = fields.Integer(string="Code TVA")
@@ -86,7 +88,7 @@ class Clients(models.Model):
     gsm_tech = fields.Integer(string="GSM")
     email_tech = fields.Char(string="Email")
 
-    email_pri = fields.Char(string="Email principale")
+
     type_offre = fields.Selection(
         [('Fibre Optique', 'Fibre Optique'), ('Voip Access', 'Voip Access'), ('Rapido Pro', 'Rapido Pro')],
         default="Fibre Optique")

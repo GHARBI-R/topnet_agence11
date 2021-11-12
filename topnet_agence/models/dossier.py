@@ -11,7 +11,7 @@ class Topnet_dossier(models.Model):
     def create(self, vals):
         if vals.get('id_dossier', _('New')) == _('New'):
             vals['id_dossier'] = self.env['ir.sequence'].next_by_code('topnet.dossier.sequence') or _('New')
-        result = super(topnet.dossier, self).create(vals)
+        result = super(Topnet_dossier, self).create(vals)
         return result
 
 # @api.model
@@ -26,11 +26,9 @@ class Topnet_dossier(models.Model):
 #
 #     return res
 
-    id_contrat = fields.Many2one('client.fiche', string='Nom du gérant')
-
-
-    # id_contrat_related = fields.Char('Numero de contrat', related='id_contrat')
-    # dossier_id = fields.Many2one('topnet.dossier', ondelete='set null', string="dossier", index=True)
+    email_pri = fields.Many2one('client.fiche', string='email du gérant')
+    id_contrat_related = fields.Char('Numero de contrat', related='email_pri.id_contrat')
+    dossier_id = fields.Many2one('topnet.dossier', ondelete='set null', string="dossier", index=True)
     id_dossier = fields.Char(string='Numéro Dossier', required=True, copy=False, readonly=True,
                              index=True, default=lambda self: _('New'))
 
