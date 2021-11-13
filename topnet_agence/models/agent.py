@@ -16,7 +16,7 @@ class Agent(models.Model):
         ('matricule_uniq', 'unique(matricule)', 'matricule existe déja'),]
 
 
-    agent_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
+    user_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
     # agent_id = fields.Many2one('agent.fiche', ondelete='set null', string="agent", index=True)
     nom = fields.Char(string="Nom", required=True)
     prenom = fields.Char(string="Prenom", required=True)
@@ -69,8 +69,8 @@ class Agent(models.Model):
             'password': values.get('mot_passe'),
             # other required field
         }
-        agent_id = self.env['res.users'].sudo().create(vals_user)
-        values.update(agent_id=agent_id.id)
+        user_id = self.env['res.users'].sudo().create(vals_user)
+        values.update(user_id=user_id.id)
         res = super(Agent, self).create(values)
 
         return res

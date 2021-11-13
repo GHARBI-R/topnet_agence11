@@ -14,7 +14,7 @@
     'license': 'AGPL-3',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'mail', 'website'],
+    'depends': ['base', 'mail'],
 
     # always loaded
     'data': [
@@ -26,7 +26,7 @@
         'views/agent.xml',
         'views/dossier.xml',
         # 'views/user.xml',
-        'views/website_menu.xml',
+        # 'views/website_menu.xml',
 
     ],
     'images': ['static/description/icon.png'],

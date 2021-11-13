@@ -2,7 +2,7 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
 access_client_coor,access.coor.fiche,model_client_fiche,group_topnet_coor,1,1,1,1
 access_client_clt,access.client.fiche,model_client_fiche,group_topnet_client,1,1,1,1
-access_client_agent,access.agent.fiche,model_client_fiche,group_topnet_agent,1,1,1,0
+access_client_agent,access.agent.fiche,model_client_fiche,group_topnet_agent,1,1,0,0
 access_client_chef,access.chef.fiche,model_client_fiche,group_topnet_chef,1,0,0,0
 access_client_responsable,access.responsable.fiche,model_client_fiche,group_topnet_responsable,1,0,0,0
 
