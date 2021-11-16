@@ -62,7 +62,7 @@
                                 <field name="tva"/>
                                 <field name="Exonéré" widget="radio"/>
                                 <field name="douane"/>
-                                <field name="activity"/>
+                                <field name="activity" />
                             </group>
 
 

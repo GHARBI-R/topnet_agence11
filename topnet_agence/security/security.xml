@@ -11,44 +11,37 @@
         <record id="group_topnet_coor" model="res.groups">
             <field name="name">Coordinateur</field>
             <field name="category_id" ref="module_category_topnet"/>
-<!--            <field name="implied_ids" eval="[(4, ref('module_category_topnet'))]"/>-->
             <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
-            <field name="company_id" eval="False"/>
         </record>
 
-                   <!--groupe des clients -->
+        <!--groupe des clients -->
         <record id="group_topnet_client" model="res.groups">
             <field name="name">Client</field>
             <field name="category_id" ref="module_category_topnet"/>
-<!--            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>-->
-            <field name="company_id" eval="False"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         </record>
 
-<!--groupe des agents -->
+        <!--groupe des agents -->
         <record id="group_topnet_agent" model="res.groups">
             <field name="name">Agent</field>
             <field name="category_id" ref="module_category_topnet"/>
-<!--            <field name="implied_ids" eval="[(4, ref('module_category_topnet'))]"/>-->
             <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
-            <field name="company_id" eval="False"/>
         </record>
 
-<!--groupe des chefs d'agence -->
+       <!--groupe des chefs d'agence -->
         <record id="group_topnet_chef" model="res.groups">
             <field name="name">Chef d'agence</field>
             <field name="category_id" ref="module_category_topnet"/>
-<!--            <field name="implied_ids" eval="[(4, ref('module_category_topnet'))]"/>-->
             <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
-            <field name="company_id" eval="False"/>
         </record>
-<!--groupe des responsables agences -->
+
+        <!--groupe des responsables agences -->
         <record id="group_topnet_responsable" model="res.groups">
             <field name="name">Responsable agence</field>
             <field name="category_id" ref="module_category_topnet"/>
-<!--            <field name="implied_ids" eval="[(4, ref('module_category_topnet'))]"/>-->
             <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
-<!--            <field name="company_id" eval="False"/>-->
         </record>
+
 <!--attribution des rôles  -->
 <!--        role agent-->
 <!--        <record model="ir.rule" id="id_rule_agent">-->

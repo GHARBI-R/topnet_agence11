@@ -11,12 +11,16 @@ class Clients(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = 'name'
 
+
+
     _sql_constraints = [
         ('cin_pass_uniq', 'unique(cin_pass)', 'Numero de cin/passeport existe déja'),
         ('email_admi_uniq', 'unique(email_admi)', 'Email existe déja'),
         ('email_tech_uniq', 'unique(email_tech)', 'Email existe déja'),
         ('email_pri_uniq', 'unique(email_pri)', 'Email existe déja'),
     ]
+
+
 
     def action_valider(self):
         for rec in self:
@@ -65,7 +69,8 @@ class Clients(models.Model):
     tva = fields.Integer(string="Code TVA")
     Exonéré = fields.Selection([("oui", "Oui"), ("non", "Non")])
     douane = fields.Integer(string="Code en douane")
-    activity = fields.Char(string="Activité de l'entreprise")
+    activity = fields.Selection([("commerciale", "Commerciale"), ("Administratif", "Administratif"),
+                             ("agricole", "Agricole"), ("touristique", "Touristique")], required=True)
     correspondance = fields.Char(string="Adresse de correspondance")
     Ville = fields.Char(string="Ville")
     postale = fields.Integer(string="Code postale")
@@ -103,12 +108,6 @@ class Clients(models.Model):
 
 
 
-    @api.model
-    def create(self, vals):
-        if vals.get('id_contrat', _('New')) == _('New'):
-            vals['id_contrat'] = self.env['ir.sequence'].next_by_code('topnet.client.sequence') or _('New')
-        result = super(Clients, self).create(vals)
-        return result
 
     @api.constrains('name', 'tel', 'fax', 'tel2', 'fax2', 'Tel_admi', 'gsm_admi', 'nom_tech', 'tel_tech',
                     'gsm_tech')
@@ -160,3 +159,10 @@ class Clients(models.Model):
         res = super(Clients, self).create(values)
 
         return res
+ # création de numero de contrat
+    @api.model
+    def create(self, vals):
+        if vals.get('id_contrat', _('New')) == _('New'):
+            vals['id_contrat'] = self.env['ir.sequence'].next_by_code('topnet.client.sequence') or _('New')
+        result = super(Clients, self).create(vals)
+        return result

@@ -3,9 +3,9 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
 
-class topnet_agence(models.Model):
-    _name = 'topnet_agence.agence'
-    _description = 'topnet_agence.agence'
+class Agence (models.Model):
+    _name = 'topnet.agence'
+    _description = 'les agences topnet'
     _rec_name = 'Nom_agence'
 
     Nom_agence = fields.Selection([("Topnet Agence centre urbain nord", "Topnet Agence centre urbain nord"),

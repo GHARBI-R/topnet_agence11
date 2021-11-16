@@ -31,7 +31,7 @@ class Agent(models.Model):
     role = fields.Selection([("administrateur", "Administrateur"), ("responsable agences", "Responsable agences"),
                              ("chef agence", "Chef agence"), ("agent", "Agent")], required=True, track_visibility="always")
 
-    Nom_agence = fields.Many2one('topnet_agence.agence', string='Agence')
+    Nom_agence = fields.Many2one('topnet.agence', string='Agence')
     agence_deleg = fields.Selection('Delegation', related='Nom_agence.Delegation')
     agence_Adresse = fields.Char('Adresse', related='Nom_agence.Adresse')
     agence_Fax = fields.Integer('Fax', related='Nom_agence.Fax')
