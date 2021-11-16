@@ -93,7 +93,7 @@
         </record>
         <!-- actions opening views on models -->
         <record model="ir.ui.view" id="topnet_agence.search">
-            <field name="name">TopnetAgence search</field>
+            <field name="name">TopnetAgent search</field>
             <field name="model">agent.fiche</field>
             <field name="arch" type="xml">
                 <search>

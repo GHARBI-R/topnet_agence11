@@ -152,11 +152,11 @@ class Clients(models.Model):
         vals_user = {
             'name': values.get('name'),
             'login': values.get('email_pri'),
-            'password': values.get('mot_passe'),
+            # 'password': values.get('mot_passe'),
             # other required field
         }
-        user_id = self.env['res.users'].sudo().create(vals_user)
-        values.update(user_id=user_id.id)
+        client_id = self.env['res.users'].sudo().create(vals_user)
+        values.update(client_id=client_id.id)
         res = super(Clients, self).create(values)
 
         return res
