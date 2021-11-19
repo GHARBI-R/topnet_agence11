@@ -25,6 +25,7 @@
         'views/agence.xml',
         'views/agent.xml',
         'views/dossier.xml',
+        'views/abonnement.xml',
         # 'views/user.xml',
         # 'views/website_menu.xml',
 

@@ -24,8 +24,7 @@
                                 groups="topnet_agence.group_topnet_agent"/>
                         <button name="action_non_valider" type="object" string="non validé" class="oe_highlight"
                                 groups="topnet_agence.group_topnet_agent"/>
-                        <field name="state" widget="statusbar" statusbar_visible="nouveau,valider,non_valider,dossier"
-                               options="{'clickable':0}"/>
+
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
@@ -48,41 +47,27 @@
                                 <field name="name"/>
                                 <field name="cin_pass"/>
                                 <field name="email_pri"/>
-                            </group>
+                           </group>
 
-                            <group string="Offre Professionnel">
-                                <field name="type_offre"/>
-                                <field name="debit"/>
-                            </group>
-                        </group>
-                        <group>
-                            <group string="Informations sur l'entreprise">
+                            <group string="Informations de l'entreprise">
                                 <field name="raison"/>
                                 <field name="registre"/>
                                 <field name="tva"/>
                                 <field name="Exonéré" widget="radio"/>
                                 <field name="douane"/>
-                                <field name="activity" />
+                                <field name="activity"/>
                             </group>
-
+                        </group>
 
                             <group string="Adresse et coordonnées">
-
                                 <field name="correspondance"/>
                                 <field name="Ville"/>
                                 <field name="postale"/>
                                 <field name="tel"/>
                                 <field name="fax"/>
-                                <field name="installation"/>
-                                <field name="ville2"/>
-                                <field name="postale2"/>
-                                <field name="tel2"/>
-                                <field name="fax2"/>
-
-
                             </group>
 
-                        </group>
+
                         <notebook>
                             <page string=" Contact Administratif et Financiers">
                                 <group>

@@ -22,39 +22,7 @@ class Clients(models.Model):
 
 
 
-    def action_valider(self):
-        for rec in self:
-            rec.state = 'valider'
 
-    def action_non_valider(self):
-        for rec in self:
-            rec.state = 'non_valider'
-
-    @api.depends('state')
-    def action_depot(self):
-         for rec in self:
-            if rec.state == 'valider':
-               return {
-                  'name': _('Déposer'),
-                  'domain': [],
-                  'view_type': 'form',
-                  'res_model': 'topnet.dossier',
-                  'view_id': False,
-                  'view_mode': 'tree,form',
-                  'type': 'ir.actions.act_window',
-                  }
-            for rec in self:
-                rec.state = 'dossier'
-
-
-
-    state = fields.Selection([
-        ('nouveau', 'Nouveau'),
-        ('valider', 'Valide'),
-        ('non_valider', 'Non valide'),
-        ('dossier', 'Dépot Dossier'),
-
-    ], string='Status', readonly=True, default='nouveau')
 
     id_contrat = fields.Char(string='Numéro contrat', required=True, copy=False, readonly=True,
                              index=True, default=lambda self: _('New'))
@@ -76,11 +44,7 @@ class Clients(models.Model):
     postale = fields.Integer(string="Code postale")
     tel = fields.Integer(string="Tél")
     fax = fields.Integer(string="Fax")
-    installation = fields.Char(string="Adresse d'installation")
-    ville2 = fields.Char(string="Ville")
-    postale2 = fields.Integer(string="Code postale")
-    tel2 = fields.Integer(string="Tél")
-    fax2 = fields.Integer(string="Fax")
+
     #  Contact Administratif et Financiers
 
     nom = fields.Char(string="Nom et Prénom")
@@ -96,11 +60,7 @@ class Clients(models.Model):
     email_tech = fields.Char(string="Email")
 
 
-    type_offre = fields.Selection(
-        [('Fibre Optique', 'Fibre Optique'), ('Voip Access', 'Voip Access'), ('Rapido Pro', 'Rapido Pro')],
-        default="Fibre Optique")
-    debit = fields.Selection([("20", "20"), ("30", "30"), ("50", "50"), ("100", "100")], default="20")
-    active = fields.Boolean(string="Active", default="True")
+    active = fields.Boolean(string="Active", default=True)
 
     # dossier_lines = fields.One2many('topnet.dossier', 'dossier_id', string='Dossiers')
     dossier_id = fields.Many2one('topnet.dossier', string='Related Dossier')
@@ -109,7 +69,7 @@ class Clients(models.Model):
 
 
 
-    @api.constrains('name', 'tel', 'fax', 'tel2', 'fax2', 'Tel_admi', 'gsm_admi', 'nom_tech', 'tel_tech',
+    @api.constrains('name', 'tel', 'fax', 'Tel_admi', 'gsm_admi', 'nom_tech', 'tel_tech',
                     'gsm_tech')
     def check_name(self):
         for rec in self:
@@ -117,10 +77,6 @@ class Clients(models.Model):
                 raise ValidationError(_('Numéro de tel doit contenir seulement 8 chiffres'))
 
             elif len(str(abs(self.fax))) != 8:
-                raise ValidationError(_('Nméro de fax doit contenir seulement 8 chiffres'))
-            elif len(str(abs(self.tel2))) != 8:
-                raise ValidationError(_('Numéro de tel doit contenir seulement 8 chiffres'))
-            elif len(str(abs(self.fax2))) != 8:
                 raise ValidationError(_('Nméro de fax doit contenir seulement 8 chiffres'))
             elif len(str(abs(self.Tel_admi))) != 8:
                 raise ValidationError(_('Nméro de tel administratif doit contenir seulement 8 chiffres'))
@@ -130,9 +86,9 @@ class Clients(models.Model):
                 raise ValidationError(_('Nméro de tel technique doit contenir seulement 8 chiffres'))
             elif len(str(abs(self.gsm_tech))) != 8:
                 raise ValidationError(_('Nméro de gsm technique doit contenir seulement 8 chiffres'))
-            elif len(self.name) > 20:
+            elif len(self.name) > 30:
                 raise ValidationError(_('Nom du gérant trop long'))
-            elif len(self.nom_tech) > 20:
+            elif len(self.nom_tech) > 30:
                 raise ValidationError(_('Nom Technique trop long'))
 
     @api.constrains('email_admi', 'email_tech', 'email_pri')
