@@ -39,7 +39,7 @@
                         </div>
                         <group>
                             <group>
-                                <field name ="agent_id" />
+
                                 <field name="nom"/>
                                 <field name="prenom"/>
                             </group>
@@ -107,7 +107,7 @@
         </record>
 
         <record model="ir.actions.act_window" id="agents_action_window">
-            <field name="name">Agents</field>
+            <field name="name">Uilisateurs</field>
             <field name="res_model">agent.fiche</field>
             <field name="view_mode">kanban,form,tree</field>
             <field name="help" type="html">
@@ -121,8 +121,9 @@
 
         <!-- actions -->
 
-        <menuitem name="Espace Agents" id="espace_agent" parent="topnet_menu_root" sequence="20"/>
-        <menuitem name="Agents" id="agent_topnet" parent="espace_agent" action="agents_action_window" sequence="20"/>
+        <menuitem name="Espace utilisateurs " id="espace_agent" parent="topnet_menu_root" sequence="20"/>
+        <menuitem name="Liste utilisateurs " id="utilisateurs_topnet" parent="topnet_menu_root"/>
+        <menuitem name="Utilisateurs" id="agent_topnet" parent="espace_agent" action="agents_action_window"/>
 
     </data>
 </odoo>

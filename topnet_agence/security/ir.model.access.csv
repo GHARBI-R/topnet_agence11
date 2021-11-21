@@ -18,4 +18,10 @@ access_agent_dossier,access.topnet.dossier,topnet_agence.model_topnet_dossier,gr
 access_chef_dossier,access.topnet.dossier,topnet_agence.model_topnet_dossier,group_topnet_chef,1,1,1,0
 access_responsable_dossier,access.topnet.dossier,topnet_agence.model_topnet_dossier,group_topnet_responsable,1,0,0,0
 
-access_agence_clt,access.topnet.agence,topnet_agence.model_topnet_agence,group_topnet_client,1,1,1,1
+access_agence_clt,access.topnet.agence,topnet_agence.model_topnet_agence,group_topnet_client,0,0,0,0
+access_agence_coor,access.topnet.agence,topnet_agence.model_topnet_agence,group_topnet_coor,1,1,1,1
+access_agence_agent,access.topnet.agence,topnet_agence.model_topnet_agence,group_topnet_agent,1,0,0,0
+access_agence_chef,access.topnet.agence,topnet_agence.model_topnet_agence,group_topnet_chef,1,0,0,0
+access_agence_responsable,access.topnet.agence,topnet_agence.model_topnet_agence,group_topnet_responsable,1,0,0,0
+
+access_abonnement_clt,access.abonnement,topnet_agence.model_abonnement,group_topnet_client,1,1,1,1

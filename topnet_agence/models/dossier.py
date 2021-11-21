@@ -14,18 +14,6 @@ class Topnet_dossier(models.Model):
         result = super(Topnet_dossier, self).create(vals)
         return result
 
-# @api.model
-# def create(self, values):
-#     vals_dossier = {
-#         'id_contrat': values.get('id_contrat'),
-#
-#     }
-#     user_id = self.env['client.fiche'].sudo().create(vals_dossier)
-#     values.update(id_contrat=id_contrat)
-#     res = super(Topnet_dossier, self).create(values)
-#
-#     return res
-
     email_pri = fields.Many2one('client.fiche', string='email du gérant')
     id_contrat_related = fields.Char('Numero de contrat', related='email_pri.id_contrat')
     dossier_id = fields.Many2one('topnet.dossier', ondelete='set null', string="dossier", index=True)
@@ -38,4 +26,3 @@ class Topnet_dossier(models.Model):
     doc3 = fields.Image(string="Contrat TOPNET", max_width=90, max_height=90, verify_resolution=True, required=True)
     doc4 = fields.Image(string="Contrat TT", max_width=90, max_height=90, verify_resolution=True, required=True)
 
-    # dossier_id = fields.Many2one('client.fiche', string='Dossier')

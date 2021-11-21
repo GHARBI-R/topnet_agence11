@@ -43,17 +43,16 @@
         </record>
 
 <!--attribution des rôles  -->
-<!--        role agent-->
-<!--        <record model="ir.rule" id="id_rule_agent">-->
-<!--            <field name="name">voir seulement sa fiche</field>-->
-<!--            <field name="model_id" ref="model_agent_fiche"/>-->
-<!--            <field name="domain_force">[('nom','=','tarhouni')]</field>-->
-<!--            <field name="groups" eval="[(4, ref('group_topnet_agent'))]"/>-->
-<!--            <field name="perm_create" eval="1"/>-->
-<!--            <field name="perm_write" eval="1"/>-->
-<!--            <field name="perm_unlink" eval="1"/>-->
-<!--            <field name="perm_read" eval="1"/>-->
-<!--        </record>-->
+<!--    <record model="ir.rule" id="see_his_own_doc">-->
+<!--        <field name="name">See His Doc Only</field>-->
+<!--        <field name="model_id" ref="model_client_fiche"/>-->
+<!--        <field name="domain_force">[('client_id.id','=','user.id')]</field>-->
+<!--        <field name="groups" eval="[(4, ref('group_topnet_client'))]"/>-->
+<!--        <field name="perm_create" eval="1"/>-->
+<!--        <field name="perm_write" eval="1"/>-->
+<!--        <field name="perm_unlink" eval="1"/>-->
+<!--        <field name="perm_read" eval="1"/>-->
+<!--    </record>-->
 
     </data>
 </odoo>

@@ -29,7 +29,8 @@ class Clients(models.Model):
 
     client_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
     role = fields.Char(string="role", default="Client")
-    name = fields.Char(string="Nom et Prénom du gérant", track_visibility="always")
+    # name = fields.Char(string="Nom et Prénom du gérant", track_visibility="always")
+    name = fields.Char(string="Nom et Prénom du gérant", related="client_id.login")
     cin_pass = fields.Integer(string="Numéro CIN/Passeport")
     email_pri = fields.Char(string="Email principale")
     raison = fields.Char(string="Raison sociale")
@@ -104,20 +105,26 @@ class Clients(models.Model):
         return True
     @api.model
     def create(self, values):
-        vals_user = {
-            'name': values.get('name'),
-            'login': values.get('email_pri'),
-            # 'password': values.get('mot_passe'),
-            # other required field
-        }
-        client_id = self.env['res.users'].sudo().create(vals_user)
-        values.update(client_id=client_id.id)
-        res = super(Clients, self).create(values)
 
+        if self.env['res.users'].sudo().search([('login', '=', values.get('email_pri') )]):
+            values.update(client_id=client_id.id)
+            print("lgin existe dans la base , donc pour le client enregistré en amant")
+        else:
+            vals_user = {
+                'name': values.get('name'),
+                'login': values.get('email_pri'),
+                # 'password': values.get('mot_passe'),
+                # other required field
+            }
+            client_id = self.env['res.users'].sudo().create(vals_user)
+            values.update(client_id=client_id.id)
+            print("lgin non existant dans la base res_users , donc pour le client enregistré par l 'administrateur ")
+
+        res = super(Clients, self).create(values)
         return res
  # création de numero de contrat
     @api.model
-    def create(self, vals):
+    def create_contrat(self, vals):
         if vals.get('id_contrat', _('New')) == _('New'):
             vals['id_contrat'] = self.env['ir.sequence'].next_by_code('topnet.client.sequence') or _('New')
         result = super(Clients, self).create(vals)

@@ -62,12 +62,6 @@ class Abonnements (models.Model):
     debit = fields.Selection([("20", "20"), ("30", "30"), ("50", "50"), ("100", "100")], default="20", required=True)
     active = fields.Boolean(string="Active", default="True")
 
-    #
-    # dossier_id = fields.Many2one('topnet.dossier', string='Related Dossier')
-    # related_dossier_id = fields.Many2one('topnet.dossier', string='Dossier')
-
-
-
 
     @api.constrains('tel2', 'fax2')
     def check_name(self):
@@ -79,16 +73,3 @@ class Abonnements (models.Model):
                 raise ValidationError(_('Nméro de fax doit contenir seulement 8 chiffres'))
 
 
-    # @api.model
-    # def create(self, values):
-    #     vals_user = {
-    #         'name': values.get('name'),
-    #         'login': values.get('email_pri'),
-    #         # 'password': values.get('mot_passe'),
-    #         # other required field
-    #     }
-    #     client_id = self.env['res.users'].sudo().create(vals_user)
-    #     values.update(client_id=client_id.id)
-    #     res = super(Clients, self).create(values)
-    #
-    #     return res

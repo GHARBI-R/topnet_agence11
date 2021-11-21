@@ -17,8 +17,8 @@ class Agent(models.Model):
 
 
     user_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
-    agent_id = fields.Integer(string='id agent ')
-    # agent_id = fields.Many2one('agent.fiche', ondelete='set null', string="agent", index=True)
+    # agent_id = fields.One2many('res.users', ondelete='set null', string="agent", index=True)
+
     nom = fields.Char(string="Nom", required=True)
     prenom = fields.Char(string="Prenom", required=True)
     adresse = fields.Char(string="Adresse", required=True)
@@ -69,7 +69,7 @@ class Agent(models.Model):
             'login': values.get('email'),
             'password': values.get('mot_passe'),
             'id': values.get('agent_id')
-            # other required field
+
         }
         user_id = self.env['res.users'].sudo().create(vals_user)
         values.update(user_id=user_id.id)
