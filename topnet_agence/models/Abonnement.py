@@ -11,6 +11,10 @@ class Abonnements (models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     # _rec_name = 'name'
 
+    def action_pris(self):
+        for rec in self:
+            rec.state = 'pris'
+
     def action_valider(self):
         for rec in self:
             rec.state = 'valider'
@@ -39,6 +43,7 @@ class Abonnements (models.Model):
 
     state = fields.Selection([
         ('nouveau', 'Nouveau'),
+        ('pris', 'Prise en charge'),
         ('valider', 'Valide'),
         ('non_valider', 'Non valide'),
         ('dossier', 'Dépot Dossier'),

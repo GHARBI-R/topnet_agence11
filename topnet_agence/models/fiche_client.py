@@ -11,18 +11,12 @@ class Clients(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = 'name'
 
-
-
     _sql_constraints = [
         ('cin_pass_uniq', 'unique(cin_pass)', 'Numero de cin/passeport existe déja'),
         ('email_admi_uniq', 'unique(email_admi)', 'Email existe déja'),
         ('email_tech_uniq', 'unique(email_tech)', 'Email existe déja'),
         ('email_pri_uniq', 'unique(email_pri)', 'Email existe déja'),
     ]
-
-
-
-
 
     id_contrat = fields.Char(string='Numéro contrat', required=True, copy=False, readonly=True,
                              index=True, default=lambda self: _('New'))
@@ -39,7 +33,7 @@ class Clients(models.Model):
     Exonéré = fields.Selection([("oui", "Oui"), ("non", "Non")])
     douane = fields.Integer(string="Code en douane")
     activity = fields.Selection([("commerciale", "Commerciale"), ("Administratif", "Administratif"),
-                             ("agricole", "Agricole"), ("touristique", "Touristique")], required=True)
+                                 ("agricole", "Agricole"), ("touristique", "Touristique")], required=True)
     correspondance = fields.Char(string="Adresse de correspondance")
     Ville = fields.Char(string="Ville")
     postale = fields.Integer(string="Code postale")
@@ -60,15 +54,11 @@ class Clients(models.Model):
     gsm_tech = fields.Integer(string="GSM")
     email_tech = fields.Char(string="Email")
 
-
     active = fields.Boolean(string="Active", default=True)
 
     # dossier_lines = fields.One2many('topnet.dossier', 'dossier_id', string='Dossiers')
     dossier_id = fields.Many2one('topnet.dossier', string='Related Dossier')
     related_dossier_id = fields.Many2one('topnet.dossier', string='Dossier')
-
-
-
 
     @api.constrains('name', 'tel', 'fax', 'Tel_admi', 'gsm_admi', 'nom_tech', 'tel_tech',
                     'gsm_tech')
@@ -103,12 +93,13 @@ class Clients(models.Model):
                 raise ValidationError("Vérifier votre adresse mail technique : %s" % obj.email_tech)
 
         return True
+
     @api.model
     def create(self, values):
 
-        if self.env['res.users'].sudo().search([('login', '=', values.get('email_pri') )]):
+        if self.env['res.users'].sudo().search([('login', '=', values.get('email_pri'))]):
             values.update(client_id=client_id.id)
-            print("lgin existe dans la base , donc pour le client enregistré en amant")
+            print("login existe dans la base, donc pour le client enregistré en amant")
         else:
             vals_user = {
                 'name': values.get('name'),
@@ -122,10 +113,24 @@ class Clients(models.Model):
 
         res = super(Clients, self).create(values)
         return res
- # création de numero de contrat
+
+    # création de numero de contrat
     @api.model
     def create_contrat(self, vals):
         if vals.get('id_contrat', _('New')) == _('New'):
             vals['id_contrat'] = self.env['ir.sequence'].next_by_code('topnet.client.sequence') or _('New')
         result = super(Clients, self).create(vals)
         return result
+
+    @api.depends()
+    def action_ab(self):
+        return {
+            'name': _('Demande Abonnement'),
+            'domain': [],
+            'view_type': 'form',
+            'res_model': 'abonnement',
+            'view_id': False,
+            'view_mode': 'tree,form',
+            'type': 'ir.actions.act_window',
+        }
+
