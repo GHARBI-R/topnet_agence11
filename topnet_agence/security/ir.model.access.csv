@@ -24,7 +24,7 @@ access_agence_agent,access.topnet.agence,topnet_agence.model_topnet_agence,group
 access_agence_chef,access.topnet.agence,topnet_agence.model_topnet_agence,group_topnet_chef,1,0,0,0
 access_agence_responsable,access.topnet.agence,topnet_agence.model_topnet_agence,group_topnet_responsable,1,0,0,0
 
-access_abonnement_clt,access.abonnement,topnet_agence.model_abonnement,group_topnet_client,1,1,1,1
+access_abonnement_clt,access.abonnement,topnet_agence.model_abonnement,group_topnet_client,1,0,1,1
 access_abonnement_agent,access.abonnement,topnet_agence.model_abonnement,group_topnet_agent,1,1,1,1
 access_abonnement_chef,access.abonnement,topnet_agence.model_abonnement,group_topnet_client,1,1,1,1
 access_abonnement_clt,access.abonnement,topnet_agence.model_abonnement,group_topnet_chef,1,1,1,1

@@ -11,6 +11,14 @@ class Abonnements (models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     # _rec_name = 'name'
 
+
+    @api.model
+    def create(self, vals):
+        if vals.get('id_abonnement', _('New')) == _('New'):
+            vals['id_abonnement'] = self.env['ir.sequence'].next_by_code('topnet.abonnement.sequence') or _('New')
+        result = super(Abonnements, self).create(vals)
+        return result
+
     def action_pris(self):
         for rec in self:
             rec.state = 'pris'
@@ -33,11 +41,11 @@ class Abonnements (models.Model):
                   'view_type': 'form',
                   'res_model': 'topnet.dossier',
                   'view_id': False,
-                  'view_mode': 'tree,form',
+                  'view_mode': 'form',
                   'type': 'ir.actions.act_window',
                   }
-            for rec in self:
-                rec.state = 'dossier'
+               for rec in self:
+                  rec.state = 'dossier'
 
 
 
@@ -84,10 +92,3 @@ class Abonnements (models.Model):
                 raise ValidationError(_('Numéro de tel doit contenir seulement 8 chiffres'))
             elif len(str(self.fax2)) != 8:
                 raise ValidationError(_('Nméro de fax doit contenir seulement 8 chiffres'))
-
-    @api.model
-    def create(self, vals):
-        if vals.get('id_abonnement', _('New')) == _('New'):
-            vals['id_abonnement'] = self.env['ir.sequence'].next_by_code('topnet.abonnement.sequence') or _('New')
-        result = super(Abonnements, self).create(vals)
-        return result

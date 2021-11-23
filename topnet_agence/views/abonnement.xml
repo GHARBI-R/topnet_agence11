@@ -89,6 +89,38 @@
         <!--            </field>-->
         <!--        </record>-->
 
+
+        <record model="ir.ui.view" id="view_abonnement_kanban">
+            <field name="name">abonnement.view.kanban</field>
+            <field name="model">abonnement</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="id_abonnement"/>
+                    <field name="type_offre"/>
+                    <field name="debit"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <ul>
+                                    <li>Numéro d'abonnement :
+                                        <field name="id_abonnement"/>
+                                    </li>
+                                    <li>Offre :
+                                        <field name="type_offre"/>
+                                    </li>
+                                    <li>Débit :
+                                        <field name="debit"/>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
         <!-- actions opening views on models -->
 
         <record model="ir.actions.act_window" id="abonnement_action_window">

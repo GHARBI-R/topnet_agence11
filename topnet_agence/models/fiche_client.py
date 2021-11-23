@@ -7,7 +7,7 @@ import re
 
 class Clients(models.Model):
     _name = 'client.fiche'
-    _description = 'fiche clients '
+    _description = 'fiche clients'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = 'name'
 
@@ -18,7 +18,17 @@ class Clients(models.Model):
         ('email_pri_uniq', 'unique(email_pri)', 'Email existe déja'),
     ]
 
-    client_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
+    @api.model
+    def create(self, vals):
+        if vals.get('id_contrat', _('New')) == _('New'):
+            vals['id_contrat'] = self.env['ir.sequence'].next_by_code('topnet.contrat.sequence') or _('New')
+        result = super(Clients, self).create(vals)
+        return result
+
+    id_contrat = fields.Char(string='Code client ', required=True, copy=False, readonly=True,
+                             index=True, default=lambda self: _('New'))
+
+    user_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
     abonnements_ids = fields.One2many(comodel_name='abonnement', inverse_name='nom_clt', string="Abonnements")
     role = fields.Char(string="role", default="Client")
     name = fields.Char(string="Nom et Prénom du gérant", track_visibility="always")
@@ -52,10 +62,6 @@ class Clients(models.Model):
     email_tech = fields.Char(string="Email")
 
     active = fields.Boolean(string="Active", default=True)
-
-    # dossier_lines = fields.One2many('topnet.dossier', 'dossier_id', string='Dossiers')
-    # dossier_id = fields.Many2one('topnet.dossier', string='Related Dossier')
-    # related_dossier_id = fields.Many2one('topnet.dossier', string='Dossier')
 
     @api.constrains('name', 'tel', 'fax', 'Tel_admi', 'gsm_admi', 'nom_tech', 'tel_tech',
                     'gsm_tech')
@@ -91,26 +97,18 @@ class Clients(models.Model):
 
         return True
 
-    @api.model
-    def create(self, values):
-
-        if self.env['res.users'].sudo().search([('login', '=', values.get('email_pri'))]):
-            values.update(client_id=client_id.id)
-            print("login existe dans la base, donc pour le client enregistré en amant")
-        else:
-            vals_user = {
-                'name': values.get('name'),
-                'login': values.get('email_pri'),
-                # 'password': values.get('mot_passe'),
-                # other required field
-            }
-            client_id = self.env['res.users'].sudo().create(vals_user)
-            values.update(client_id=client_id.id)
-            print("lgin non existant dans la base res_users , donc pour le client enregistré par l 'administrateur ")
-
-        res = super(Clients, self).create(values)
-        return res
-
+    # @api.model
+    # def create(self, values):
+    #     vals_user = {
+    #         'name': values.get('name'),
+    #         'login': values.get('email_pri'),
+    #         # other required field
+    #     }
+    #     user_id = self.env['res.users'].sudo().create(vals_user)
+    #     values.update(user_id=user_id.id)
+    #     res = super(Clients, self).create(values)
+    #
+    #     return res
 
     @api.depends()
     def action_ab(self):
@@ -120,7 +118,7 @@ class Clients(models.Model):
             'view_type': 'form',
             'res_model': 'abonnement',
             'view_id': False,
-            'view_mode': 'tree,form',
+            'view_mode': 'form',
             'type': 'ir.actions.act_window',
         }
 

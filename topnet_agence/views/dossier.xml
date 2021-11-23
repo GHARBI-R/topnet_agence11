@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <tree>
 <!--                    <field name="id_contrat_related"/>-->
-                    <field name="id_dossier"/>
+
                     <field name="doc1"/>
                     <field name="doc2"/>
                     <field name="doc3"/>
@@ -31,7 +31,7 @@
                         <group>
                             <group>
 <!--                                <field name="id_contrat_related"/>-->
-                                <field name="id_dossier"/>
+
                                 <field name="doc1"/>
                                 <field name="doc2"/>
 
@@ -61,7 +61,34 @@
                 </form>
             </field>
         </record>
+        <record model="ir.ui.view" id="view_dossier_kanban">
+            <field name="name">dossier.view.kanban</field>
+            <field name="model">topnet.dossier</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="doc1"/>
+                    <field name="doc2"/>
 
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <ul>
+                                    <li>CIN du gérant :
+                                        <field name="doc2"/>
+                                    </li>
+                                    <li>Registre de commerce :
+                                        <field name="doc1"/>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
 
         <record model="ir.actions.act_window" id="dossier_action_window">
             <field name="name">dossier</field>
