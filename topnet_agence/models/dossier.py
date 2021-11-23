@@ -15,7 +15,7 @@ class Topnet_dossier(models.Model):
         return result
 
     email_pri = fields.Many2one('client.fiche', string='email du gérant')
-    id_contrat_related = fields.Char('Numero de contrat', related='email_pri.id_contrat')
+    # id_contrat_related = fields.Char('Numero de contrat', related='email_pri.id_contrat')
     dossier_id = fields.Many2one('topnet.dossier', ondelete='set null', string="dossier", index=True)
     id_dossier = fields.Char(string='Numéro Dossier', required=True, copy=False, readonly=True,
                              index=True, default=lambda self: _('New'))

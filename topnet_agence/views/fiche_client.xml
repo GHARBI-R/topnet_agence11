@@ -8,7 +8,9 @@
             <field name="arch" type="xml">
                 <tree string="Clients">
                     <field name="name"/>
-                    <field name="related_dossier_id"/>
+                    <field name="cin_pass"/>
+                    <field name="email_pri"/>
+
                 </tree>
             </field>
         </record>
@@ -26,16 +28,13 @@
                         <div class="oe_button_box" name="button_box">
                             <button name="action_ab" class="oe_stat_button" type="object" string="Demande Abonnement"
                                     icon="fa-pencil-square-o">
-                                <!--  <field string="Déposer dossier" name="dossier_lines" widget="statinfo"/>-->
                             </button>
                         </div>
                         <div class="oe_title">
                             <h1>
-                                <field name="id_contrat" readonly="1"/>
+
                             </h1>
-                            <group>
-                                <field name="related_dossier_id" options="{'no_create': True, 'no_open': False}"/>
-                            </group>
+
                         </div>
 
                         <group>
@@ -43,7 +42,7 @@
                                 <field name="name"/>
                                 <field name="cin_pass"/>
                                 <field name="email_pri"/>
-                           </group>
+                            </group>
 
                             <group string="Informations de l'entreprise">
                                 <field name="raison"/>
@@ -55,13 +54,13 @@
                             </group>
                         </group>
 
-                            <group string="Adresse et coordonnées">
-                                <field name="correspondance"/>
-                                <field name="Ville"/>
-                                <field name="postale"/>
-                                <field name="tel"/>
-                                <field name="fax"/>
-                            </group>
+                        <group string="Adresse et coordonnées">
+                            <field name="correspondance"/>
+                            <field name="Ville"/>
+                            <field name="postale"/>
+                            <field name="tel"/>
+                            <field name="fax"/>
+                        </group>
 
 
                         <notebook>
@@ -81,6 +80,11 @@
                                     <field name="email_tech"/>
                                 </group>
                             </page>
+                            <page string="Liste des abonnements">
+                              <group>
+                                <field name="abonnements_ids"/>
+                              </group>
+                            </page>
                         </notebook>
                     </sheet>
                     <div class='oe_chatter'>
@@ -97,10 +101,44 @@
             <field name="model">client.fiche</field>
             <field name="arch" type="xml">
                 <search string="Chercher un client">
-                    <field name="name" filter_domain="['|',('name', 'ilike', self),('id_contrat', 'ilike', self)]"/>
-                    <field name="id_contrat"/>
+                    <!--                    <field name="name" filter_domain="['|',('name', 'ilike', self),-->
+                    <!--&lt;!&ndash;                                                     ('id_contrat', 'ilike', self)&ndash;&gt;-->
+                    <!--                                                     ]"/>-->
+                    <!--                    <field name="id_contrat"/>-->
                     <field name="name"/>
                 </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_class_kanban">
+            <field name="name">client.view.kanban</field>
+            <field name="model">client.fiche</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="cin_pass"/>
+                    <field name="email_pri"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <ul>
+                                    <li>Nom du client :
+                                        <field name="name"/>
+                                    </li>
+                                    <li>CIN :
+                                        <field name="cin_pass"/>
+                                    </li>
+                                    <li>Email principal :
+                                        <field name="email_pri"/>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                        </t>
+                    </templates>
+                </kanban>
             </field>
         </record>
 

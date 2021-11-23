@@ -18,13 +18,10 @@ class Clients(models.Model):
         ('email_pri_uniq', 'unique(email_pri)', 'Email existe déja'),
     ]
 
-    id_contrat = fields.Char(string='Numéro contrat', required=True, copy=False, readonly=True,
-                             index=True, default=lambda self: _('New'))
-
     client_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
+    abonnements_ids = fields.One2many(comodel_name='abonnement', inverse_name='nom_clt', string="Abonnements")
     role = fields.Char(string="role", default="Client")
-    # name = fields.Char(string="Nom et Prénom du gérant", track_visibility="always")
-    name = fields.Char(string="Nom et Prénom du gérant", related="client_id.login")
+    name = fields.Char(string="Nom et Prénom du gérant", track_visibility="always")
     cin_pass = fields.Integer(string="Numéro CIN/Passeport")
     email_pri = fields.Char(string="Email principale")
     raison = fields.Char(string="Raison sociale")
@@ -57,8 +54,8 @@ class Clients(models.Model):
     active = fields.Boolean(string="Active", default=True)
 
     # dossier_lines = fields.One2many('topnet.dossier', 'dossier_id', string='Dossiers')
-    dossier_id = fields.Many2one('topnet.dossier', string='Related Dossier')
-    related_dossier_id = fields.Many2one('topnet.dossier', string='Dossier')
+    # dossier_id = fields.Many2one('topnet.dossier', string='Related Dossier')
+    # related_dossier_id = fields.Many2one('topnet.dossier', string='Dossier')
 
     @api.constrains('name', 'tel', 'fax', 'Tel_admi', 'gsm_admi', 'nom_tech', 'tel_tech',
                     'gsm_tech')
@@ -114,13 +111,6 @@ class Clients(models.Model):
         res = super(Clients, self).create(values)
         return res
 
-    # création de numero de contrat
-    @api.model
-    def create_contrat(self, vals):
-        if vals.get('id_contrat', _('New')) == _('New'):
-            vals['id_contrat'] = self.env['ir.sequence'].next_by_code('topnet.client.sequence') or _('New')
-        result = super(Clients, self).create(vals)
-        return result
 
     @api.depends()
     def action_ab(self):

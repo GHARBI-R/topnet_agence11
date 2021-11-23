@@ -50,11 +50,21 @@ class Abonnements (models.Model):
 
     ], string='Status', readonly=True, default='nouveau')
 
-    id_contrat = fields.Char(string='Numéro contrat', required=True, copy=False, readonly=True,
+    id_abonnement = fields.Char(string='Numéro abonnement', required=True, copy=False, readonly=True,
                              index=True, default=lambda self: _('New'))
 
-    client_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
+    etat = fields.Selection(
+        [("contrat en cours de traitement coté topnet", "Contrat en cours de traitement coté topnet"),
+         ("Etude", "Etude"),
+         ("contrat rejeté par topnet", "Contrat rejeté par topnet"),
+         ("contrat rejeté par TT", "Contrat rejeté par TT"),
+         ("contrat validé par topnet", "Contrat validé par topnet"),
+         ("ligne installé par TT", "ligne installé par TT"),
+         ("initiale", "Etat Initiale")] , default="initiale", string="Etat du dossier")
 
+    client_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
+    nom_clt= fields.Many2one(comodel_name='client.fiche', string='nom client')
+    nom_clt_rel= fields.Char (string='nom du client', related='nom_clt.name')
     installation = fields.Char(string="Adresse d'installation", required=True)
     ville2 = fields.Char(string="Ville" ,required=True)
     postale2 = fields.Integer(string="Code postale", required=True)
@@ -65,8 +75,6 @@ class Abonnements (models.Model):
         [('Fibre Optique', 'Fibre Optique'), ('Voip Access', 'Voip Access'), ('Rapido Pro', 'Rapido Pro')],
         default="Fibre Optique", required=True)
     debit = fields.Selection([("20", "20"), ("30", "30"), ("50", "50"), ("100", "100")], default="20", required=True)
-    active = fields.Boolean(string="Active", default="True")
-
 
     @api.constrains('tel2', 'fax2')
     def check_name(self):
@@ -77,4 +85,9 @@ class Abonnements (models.Model):
             elif len(str(self.fax2)) != 8:
                 raise ValidationError(_('Nméro de fax doit contenir seulement 8 chiffres'))
 
-
+    @api.model
+    def create(self, vals):
+        if vals.get('id_abonnement', _('New')) == _('New'):
+            vals['id_abonnement'] = self.env['ir.sequence'].next_by_code('topnet.abonnement.sequence') or _('New')
+        result = super(Abonnements, self).create(vals)
+        return result

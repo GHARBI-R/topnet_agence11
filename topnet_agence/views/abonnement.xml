@@ -7,8 +7,9 @@
             <field name="model">abonnement</field>
             <field name="arch" type="xml">
                 <tree string="Demande d'abonnement ">
-<!--                    <field name="name"/>-->
-<!--                    <field name="related_dossier_id"/>-->
+                    <field name="id_abonnement"/>
+                    <field name="etat"/>
+                    <field name="installation"/>
                 </tree>
             </field>
         </record>
@@ -26,43 +27,44 @@
                                 groups="topnet_agence.group_topnet_agent"/>
                         <button name="action_pris" type="object" string="Pris en charge" class="oe_highlight"
                                 groups="topnet_agence.group_topnet_agent"/>
-                        <field name="state" widget="statusbar" statusbar_visible="nouveau,pris,valider,non_valider,dossier"
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="nouveau,pris,valider,non_valider,dossier"
                                options="{'clickable':0}"/>
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
                             <button name="action_depot" class="oe_stat_button" type="object" string="Déposer "
                                     icon="fa-pencil-square-o">
-                                <!--  <field string="Déposer dossier" name="dossier_lines" widget="statinfo"/>-->
                             </button>
                         </div>
                         <div class="oe_title">
-<!--                            <h1>-->
-<!--                                <field name="id_contrat" readonly="1"/>-->
-<!--                            </h1>-->
-<!--                            <group>-->
-<!--                                <field name="related_dossier_id" options="{'no_create': True, 'no_open': False}"/>-->
-<!--                            </group>-->
+
                         </div>
 
                         <group>
                             <group string="Informations du client ">
-<!--                                <field name="name"/>-->
-<!--                                         id_contrat-->
-<!--                                <field name="email_pri"/>-->
+                                <field name="id_abonnement"/>
+                                <field name="nom_clt_rel"/>
                             </group>
 
+                            <group string="Etat du dossier ">
+                                <field name="etat" attrs="{'readonly':[('topnet_agence.group_topnet_client')]}"/>
 
+                            </group>
                         </group>
                         <group>
-                          <group string="Adresse et coordonnées">
+                            <group string="Adresse et coordonnées">
                                 <field name="installation"/>
                                 <field name="ville2"/>
                                 <field name="postale2"/>
                                 <field name="tel2"/>
                                 <field name="fax2"/>
-                           </group>
+                            </group>
+                            <group string="Offre  ">
+                                <field name="type_offre"/>
+                                <field name="debit"/>
 
+                            </group>
                         </group>
 
                     </sheet>
@@ -75,27 +77,27 @@
             </field>
         </record>
 
-<!--        <record id="topnet_abonnement_search" model="ir.ui.view">-->
-<!--            <field name="name">topnet.client.search</field>-->
-<!--            <field name="model">client.fiche</field>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <search string="Chercher un client">-->
-<!--                    <field name="name" filter_domain="['|',('name', 'ilike', self),('id_contrat', 'ilike', self)]"/>-->
-<!--                    <field name="id_contrat"/>-->
-<!--                    <field name="name"/>-->
-<!--                </search>-->
-<!--            </field>-->
-<!--        </record>-->
+        <!--        <record id="topnet_abonnement_search" model="ir.ui.view">-->
+        <!--            <field name="name">topnet.client.search</field>-->
+        <!--            <field name="model">client.fiche</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <search string="Chercher un client">-->
+        <!--                    <field name="name" filter_domain="['|',('name', 'ilike', self),('id_contrat', 'ilike', self)]"/>-->
+        <!--                    <field name="id_contrat"/>-->
+        <!--                    <field name="name"/>-->
+        <!--                </search>-->
+        <!--            </field>-->
+        <!--        </record>-->
 
         <!-- actions opening views on models -->
 
         <record model="ir.actions.act_window" id="abonnement_action_window">
-            <field name="name">Abonnement </field>
+            <field name="name">Abonnement</field>
             <field name="res_model">abonnement</field>
             <field name="view_mode">kanban,form,tree</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
-                    Créer votre premier abonnement  !
+                    Créer votre premier abonnement !
                 </p>
             </field>
         </record>
@@ -108,7 +110,7 @@
         <menuitem name="Espace Abonnement" id="espace_FO" parent="topnet_menu_root" sequence="20"/>
 
         <!-- actions -->
-        <menuitem name="Abonnement FO " id="abonnement_fo" parent="espace_FO" />
+        <menuitem name="Abonnement FO " id="abonnement_fo" parent="espace_FO"/>
         <menuitem name="Liste des abonnement " id="liste_clients" parent="espace_FO" action="abonnement_action_window"/>
 
     </data>
