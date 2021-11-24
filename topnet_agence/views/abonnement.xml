@@ -59,6 +59,8 @@
                                 <field name="postale2"/>
                                 <field name="tel2"/>
                                 <field name="fax2"/>
+                                <field name="abonnement_date"/>
+                                abonnement_date
                             </group>
                             <group string="Offre  ">
                                 <field name="type_offre"/>
@@ -122,17 +124,38 @@
             </field>
         </record>
         <!-- actions opening views on models -->
+        <record id="abonnement_calendar" model="ir.ui.view">
+        <field name="name">topnet.abonnement.calendar</field>
+        <field name="model">abonnement</field>
+        <field name="arch" type="xml">
+            <calendar string="Abonnement Calendar" date_start="abonnement_date" color="id_abonnement" mode="month" quick_add="True">
+               <field name="id_abonnement"/>
+                    <field name="type_offre"/>
+            </calendar>
+        </field>
+    </record>
 
         <record model="ir.actions.act_window" id="abonnement_action_window">
             <field name="name">Abonnement</field>
             <field name="res_model">abonnement</field>
-            <field name="view_mode">kanban,form,tree</field>
+            <field name="view_mode">kanban,form,tree,graph,calendar</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     Créer votre premier abonnement !
                 </p>
             </field>
         </record>
+
+        <record id="abonnement_graph" model="ir.ui.view">
+        <field name="name">topnet.abonnement.graph</field>
+        <field name="model">abonnement</field>
+        <field name="arch" type="xml">
+            <graph string="Graphique Demandes" type="pie">
+                <field name="id_abonnement"/>
+                <field name="type_offre" type="measure"/>
+            </graph>
+        </field>
+    </record>
 
 
         <!-- Top menu item -->
