@@ -1,7 +1,6 @@
 <odoo>
     <data>
         <!-- explicit list view definition -->
-
         <record model="ir.ui.view" id="abonnement_list">
             <field name="name">Demande d'abonnement</field>
             <field name="model">abonnement</field>
@@ -20,7 +19,6 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-
                         <button name="action_valider" type="object" string="validé" class="oe_highlight"
                                 groups="topnet_agence.group_topnet_agent"/>
                         <button name="action_non_valider" type="object" string="non validé" class="oe_highlight"
@@ -60,7 +58,7 @@
                                 <field name="tel2"/>
                                 <field name="fax2"/>
                                 <field name="abonnement_date"/>
-                                abonnement_date
+
                             </group>
                             <group string="Offre  ">
                                 <field name="type_offre"/>
