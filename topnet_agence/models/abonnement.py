@@ -68,6 +68,7 @@ class Abonnements (models.Model):
          ("contrat rejeté par TT", "Contrat rejeté par TT"),
          ("contrat validé par topnet", "Contrat validé par topnet"),
          ("ligne installé par TT", "ligne installé par TT"),
+         ("demande TV", "Demande d'abonnement traitée et clotûrée"),
          ("initiale", "Etat Initiale")] , default="initiale", string="Etat du dossier")
 
     client_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
