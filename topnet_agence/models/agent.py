@@ -15,6 +15,13 @@ class Agent(models.Model):
         ('email_uniq', 'unique(email)', 'Email existe déja'),
         ('matricule_uniq', 'unique(matricule)', 'matricule existe déja'),]
 
+    def action_disponible(self):
+        for rec in self:
+            rec.state = 'disponible'
+
+    def action_abscent(self):
+        for rec in self:
+            rec.state = 'abscent'
 
     user_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
     nom = fields.Char(string="Nom", required=True)

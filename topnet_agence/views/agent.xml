@@ -27,7 +27,11 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-
+                         <button name="action_disponible" type="object" string="Disponible" class="oe_highlight"
+                                groups="topnet_agence.group_topnet_agent"/>
+                        <button name="action_abscent" type="object" string="Abscent" class="oe_highlight"
+                                groups="topnet_agence.group_topnet_agent"/>
+                        <field name="state" widget="statusbar" statusbar_visible="disponible,abscent" />
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
@@ -52,8 +56,8 @@
                                 <field name="naissance"/>
                                 <field name="adresse" placeholder="Rue...Ville..."/>
                                 <field name="email"/>
-                                <field name="mot_passe" password="True" />
-                                <field name="c_mot_passe" password="True" />
+                                <field name="mot_passe" password="True"/>
+                                <field name="c_mot_passe" password="True"/>
                             </group>
                             <group>
                                 <field name="num_cin_num_passeport"/>
