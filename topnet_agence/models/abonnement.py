@@ -79,6 +79,9 @@ class Abonnements (models.Model):
     raison_clt= fields.Many2one(comodel_name='client.fiche', string='raison')
     raison_clt_rel= fields.Char (string='Raison sociale', related='raison_clt.raison')
 
+    agent_id = fields.Many2one(comodel_name='agent.fiche', string='agent')
+    agent_rel = fields.Char(string='Agent ', related='agent_id.nom')
+
     contrat_clt = fields.Many2one(comodel_name='client.fiche', string='contrat')
     contrat_clt_rel = fields.Char(string='numéro de contrat', related='contrat_clt.id_contrat')
     installation = fields.Char(string="Adresse d'installation", required=True)
