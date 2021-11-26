@@ -154,7 +154,7 @@
             <field name="arch" type="xml">
                 <graph string="Graphique Demandes" type="pie">
                     <field name="id_abonnement"/>
-                    <field name="type_offre" type="measure"/>
+                    <field name="etat" type="measure"/>
                 </graph>
             </field>
         </record>

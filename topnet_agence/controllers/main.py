@@ -16,8 +16,6 @@ class Topnet(http.Controller):
     # creation dans la base de données
     @http.route('/creer/client', type="http", auth='public', website=True)
     def creeruser(self, **kw):
-
-
         vals_user = {
             'name': kw.get('name'),
             'login': kw.get('email_pri'),

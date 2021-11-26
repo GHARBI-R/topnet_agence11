@@ -100,19 +100,19 @@ class Clients(models.Model):
         return True
 
 
-    # @api.model
-    # def create(self, values):
-    #     vals_user = {
-    #         'name': values.get('name'),
-    #         'login': values.get('email_pri'),
-    #
-    #         # other required field
-    #     }
-    #     user_id = self.env['res.users'].sudo().create(vals_user)
-    #     values.update(user_id=user_id.id)
-    #     res = super(Clients, self).create(values)
+    @api.model
+    def create(self, values):
+        vals_user = {
+            'name': values.get('name'),
+            'login': values.get('email_pri'),
 
-        # return res
+            # other required field
+        }
+        user_id = self.env['res.users'].sudo().create(vals_user)
+        values.update(user_id=user_id.id)
+        res = super(Clients, self).create(values)
+
+        return res
 
     @api.depends()
     def action_ab(self):
