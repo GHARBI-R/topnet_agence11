@@ -49,7 +49,8 @@ class Abonnements (models.Model):
 
     def action_raccord(self):
         for rec in self:
-            rec.state = 'raccord'
+           if rec.state == 'valider':
+              rec.state ='raccord'
 
     state = fields.Selection([
         ('nouveau', 'Nouveau'),
