@@ -122,15 +122,16 @@
         </record>
         <!-- actions opening views on models -->
         <record id="abonnement_calendar" model="ir.ui.view">
-        <field name="name">topnet.abonnement.calendar</field>
-        <field name="model">abonnement</field>
-        <field name="arch" type="xml">
-            <calendar string="Abonnement Calendar" date_start="abonnement_date" color="id_abonnement" mode="month" quick_add="True">
-               <field name="id_abonnement"/>
+            <field name="name">topnet.abonnement.calendar</field>
+            <field name="model">abonnement</field>
+            <field name="arch" type="xml">
+                <calendar string="Abonnement Calendar" date_start="abonnement_date" color="id_abonnement" mode="month"
+                          quick_add="True">
+                    <field name="id_abonnement"/>
                     <field name="type_offre"/>
-            </calendar>
-        </field>
-    </record>
+                </calendar>
+            </field>
+        </record>
 
         <record model="ir.actions.act_window" id="abonnement_action_window">
             <field name="name">Abonnement</field>
@@ -144,15 +145,26 @@
         </record>
 
         <record id="abonnement_graph" model="ir.ui.view">
-        <field name="name">topnet.abonnement.graph</field>
-        <field name="model">abonnement</field>
-        <field name="arch" type="xml">
-            <graph string="Graphique Demandes" type="pie">
-                <field name="id_abonnement"/>
-                <field name="type_offre" type="measure"/>
-            </graph>
-        </field>
-    </record>
+            <field name="name">topnet.abonnement.graph</field>
+            <field name="model">abonnement</field>
+            <field name="arch" type="xml">
+                <graph string="Graphique Demandes" type="pie">
+                    <field name="id_abonnement"/>
+                    <field name="type_offre" type="measure"/>
+                </graph>
+            </field>
+        </record>
+        <record id="view_order_form_cust_ref_readonly" model="ir.ui.view">
+            <field name="name">abonnement form</field>
+            <field name="model">abonnement</field>
+            <field name="inherit_id" ref="abonnement_form"/>
+            <field name="groups_id" eval="[(6, 0, [ref('topnet_agence.group_topnet_client') ])]"/>
+            <field name="arch" type="xml">
+                <field name='etat' position="attributes">
+                    <attribute name="attrs">{'readonly':1}</attribute>
+                </field>
+            </field>
+        </record>
 
 
         <!-- Top menu item -->

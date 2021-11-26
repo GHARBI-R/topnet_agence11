@@ -29,6 +29,7 @@ class Clients(models.Model):
                              index=True, default=lambda self: _('New'))
 
     user_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
+
     abonnements_ids = fields.One2many(comodel_name='abonnement', inverse_name='nom_clt', string="Abonnements")
     role = fields.Char(string="role", default="Client")
     name = fields.Char(string="Nom et Prénom du gérant", track_visibility="always")
@@ -97,24 +98,26 @@ class Clients(models.Model):
 
         return True
 
+
     # @api.model
     # def create(self, values):
     #     vals_user = {
     #         'name': values.get('name'),
     #         'login': values.get('email_pri'),
+    #
     #         # other required field
     #     }
     #     user_id = self.env['res.users'].sudo().create(vals_user)
     #     values.update(user_id=user_id.id)
     #     res = super(Clients, self).create(values)
-    #
-    #     return res
+
+        # return res
 
     @api.depends()
     def action_ab(self):
         return {
             'name': _('Demande Abonnement'),
-            'domain': [],
+            'domain': [('user_id', '=', self.id)],
             'view_type': 'form',
             'res_model': 'abonnement',
             'view_id': False,

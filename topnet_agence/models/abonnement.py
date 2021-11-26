@@ -37,7 +37,7 @@ class Abonnements (models.Model):
             if rec.state == 'valider':
                return {
                   'name': _('Déposer'),
-                  'domain': [],
+                  'domain': [('user_id', '=', self.id)],
                   'view_type': 'form',
                   'res_model': 'topnet.dossier',
                   'view_id': False,

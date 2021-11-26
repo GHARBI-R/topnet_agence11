@@ -80,7 +80,7 @@
                                     <field name="email_tech"/>
                                 </group>
                             </page>
-                            <page string="Liste des abonnements">
+                            <page string="Gestion abonnements">
                               <group>
                                 <field name="abonnements_ids"/>
                               </group>
