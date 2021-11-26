@@ -21,18 +21,20 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-
+                        <h1>
+                            <field name="id_contrat" readonly="1"/>
+                        </h1>
 
                     </header>
                     <sheet>
-                        <div class="oe_button_box" name="button_box">
-                            <button name="action_ab" class="oe_stat_button" type="object" string="Demande Abonnement"
-                                    icon="fa-pencil-square-o">
-                            </button>
-                        </div>
+<!--                        <div class="oe_button_box" name="button_box">-->
+<!--                            <button name="action_ab" class="oe_stat_button" type="object" string="Demande Abonnement"-->
+<!--                                    icon="fa-pencil-square-o">-->
+<!--                            </button>-->
+<!--                        </div>-->
                         <div class="oe_title">
                             <h1>
-                                 <field name="id_contrat" readonly="1"/>
+                                <field name="id_contrat" readonly="1"/>
                             </h1>
 
                         </div>
@@ -53,38 +55,34 @@
                                 <field name="activity"/>
                             </group>
                         </group>
-
-                        <group string="Adresse et coordonnées">
-                            <field name="correspondance"/>
-                            <field name="Ville"/>
-                            <field name="postale"/>
-                            <field name="tel"/>
-                            <field name="fax"/>
+                        <group>
+                            <group string="Adresse et coordonnées">
+                                <field name="correspondance"/>
+                                <field name="Ville"/>
+                                <field name="postale"/>
+                                <field name="tel"/>
+                                <field name="fax"/>
+                            </group>
+                            <group string=" Contact Administratif et Financiers">
+                                <field name="nom"/>
+                                <field name="Tel_admi"/>
+                                <field name="gsm_admi"/>
+                                <field name="email_admi"/>
+                            </group>
+                            <group string="Contact technique ">
+                                <field name="nom_tech"/>
+                                <field name="tel_tech"/>
+                                <field name="gsm_tech"/>
+                                <field name="email_tech"/>
+                            </group>
                         </group>
 
-
                         <notebook>
-                            <page string=" Contact Administratif et Financiers">
+                            <page string="Gestion des abonnements">
                                 <group>
-                                    <field name="nom"/>
-                                    <field name="Tel_admi"/>
-                                    <field name="gsm_admi"/>
-                                    <field name="email_admi"/>
-                                </group>
-                            </page>
-                            <page string="Contact technique">
-                                <group>
-                                    <field name="nom_tech"/>
-                                    <field name="tel_tech"/>
-                                    <field name="gsm_tech"/>
-                                    <field name="email_tech"/>
-                                </group>
-                            </page>
-                            <page string="Gestion abonnements">
-                              <group>
-                                <field name="abonnements_ids"/>
+                                    <field name="abonnements_ids"/>
 
-                              </group>
+                                </group>
                             </page>
                         </notebook>
                     </sheet>
@@ -134,7 +132,7 @@
                                         <field name="email_pri"/>
                                     </li>
                                     <li>
-                                         <field name="id_contrat"/>
+                                        <field name="id_contrat"/>
                                     </li>
                                 </ul>
                             </div>

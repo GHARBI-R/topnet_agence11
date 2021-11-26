@@ -25,8 +25,10 @@
                                 groups="topnet_agence.group_topnet_agent"/>
                         <button name="action_pris" type="object" string="Pris en charge" class="oe_highlight"
                                 groups="topnet_agence.group_topnet_agent"/>
+                        <button name="action_raccord" type="object" string="Frais de raccordement" class="oe_highlight"
+                                groups="topnet_agence.group_topnet_client"/>
                         <field name="state" widget="statusbar"
-                               statusbar_visible="nouveau,pris,valider,non_valider,dossier"
+                               statusbar_visible="nouveau,pris,valider,raccord,non_valider,dossier"
                                options="{'clickable':0}"/>
                     </header>
                     <sheet>

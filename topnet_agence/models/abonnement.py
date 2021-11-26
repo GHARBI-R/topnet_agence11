@@ -34,7 +34,7 @@ class Abonnements (models.Model):
     @api.depends('state')
     def action_depot(self):
          for rec in self:
-            if rec.state == 'valider':
+            if rec.state == 'raccord':
                return {
                   'name': _('Déposer'),
                   'domain': [('user_id', '=', self.id)],
@@ -47,12 +47,15 @@ class Abonnements (models.Model):
                for rec in self:
                   rec.state = 'dossier'
 
-
+    def action_raccord(self):
+        for rec in self:
+            rec.state = 'raccord'
 
     state = fields.Selection([
         ('nouveau', 'Nouveau'),
         ('pris', 'Prise en charge'),
         ('valider', 'Valide'),
+        ('raccord', 'Frais de raccordement'),
         ('non_valider', 'Non valide'),
         ('dossier', 'Dépot Dossier'),
 
