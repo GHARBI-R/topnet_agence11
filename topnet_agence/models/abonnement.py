@@ -72,8 +72,11 @@ class Abonnements (models.Model):
          ("initiale", "Etat Initiale")] , default="initiale", string="Etat du dossier")
 
     client_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
-    nom_clt= fields.Many2one(comodel_name='client.fiche', string='nom client')
-    nom_clt_rel= fields.Char (string='nom du client', related='nom_clt.name')
+    raison_clt= fields.Many2one(comodel_name='client.fiche', string='raison')
+    raison_clt_rel= fields.Char (string='Raison sociale', related='raison_clt.raison')
+
+    contrat_clt = fields.Many2one(comodel_name='client.fiche', string='contrat')
+    contrat_clt_rel = fields.Char(string='numéro de contrat', related='contrat_clt.id_contrat')
     installation = fields.Char(string="Adresse d'installation", required=True)
     ville2 = fields.Char(string="Ville" ,required=True)
     postale2 = fields.Integer(string="Code postale", required=True)

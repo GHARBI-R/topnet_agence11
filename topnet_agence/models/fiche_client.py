@@ -30,7 +30,8 @@ class Clients(models.Model):
 
     user_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
 
-    abonnements_ids = fields.One2many(comodel_name='abonnement', inverse_name='nom_clt', string="Abonnements")
+    abonnements_ids = fields.One2many(comodel_name='abonnement', inverse_name='raison_clt', string="Abonnements")
+    contrat_ids = fields.One2many(comodel_name='abonnement', inverse_name='contrat_clt', string="contrat")
     role = fields.Char(string="role", default="Client")
     name = fields.Char(string="Nom et Prénom du gérant", track_visibility="always")
     cin_pass = fields.Integer(string="Numéro CIN/Passeport")

@@ -42,7 +42,8 @@
                         <group>
                             <group string="Informations du client ">
                                 <field name="id_abonnement"/>
-                                <field name="nom_clt_rel"/>
+                                <field name="raison_clt_rel"/>
+                                <field name="contrat_clt_rel"/>
                             </group>
 
                             <group string="Etat du dossier ">
