@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--séquence pour numero de contrat -->
+
+    <data noupdate="1">
+
+        <record id="seq_topnet_client" model="ir.sequence">
+            <field name="name">Client Sequence</field>
+            <field name="code">topnet.contrat.sequence</field>
+            <field name="prefix">%(year)s-CP</field>
+            <field name="padding">3</field>
+
+        </record>
+    <!--séquence pour numero de dossier -->
+        <record id="seq_dossier_client" model="ir.sequence">
+            <field name="name">Abonnement Sequence</field>
+            <field name="code">topnet.abonnement.sequence</field>
+            <field name="prefix">%(year)s-D</field>
+            <field name="padding">3</field>
+
+        </record>
+    </data>
+</odoo>
