@@ -86,6 +86,14 @@
                             <page string="Notes internes">
                                 Ajouter un note interne...
                             </page>
+
+                            <page string="Gestion des abonnements">
+                                <group>
+                                    <field name="abonnements_ids"/>
+
+                                </group>
+                            </page>
+
                         </notebook>
                     </sheet>
                     <div class='oe_chatter'>
