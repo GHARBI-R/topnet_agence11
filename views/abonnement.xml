@@ -51,7 +51,7 @@
 
 
                             <group string="Etat du dossier ">
-                                <field name="etat" attrs="{'readonly':[('topnet_agence.group_topnet_client')]}"/>
+                                <field name="etat"/>
                                 <field name="agent_id"/>
 
                                 <field name="agent_rel"/>
