@@ -40,7 +40,7 @@
                         </div>
 
                         <group>
-                            <group string="Informations personnels">
+                            <group string="Informations personnelles">
                                 <field name="name"/>
                                 <field name="cin_pass"/>
                                 <field name="email_pri"/>
@@ -56,7 +56,7 @@
                             </group>
                         </group>
                         <group>
-                            <group string="Adresse et coordonnées">
+                            <group string="Adresses et coordonnées">
                                 <field name="correspondance"/>
                                 <field name="Ville"/>
                                 <field name="postale"/>
@@ -84,6 +84,18 @@
 
                                 </group>
                             </page>
+                            <page string="Gestion des dossiers">
+                                <group>
+                                    <field name="dossiers_ids"/>
+
+                                </group>
+                            </page>
+                            <page string="Prise de rendez-vous">
+                                <group>
+                                    <field name="rdvs_ids"/>
+
+                                </group>
+                            </page>
                         </notebook>
                     </sheet>
                     <div class='oe_chatter'>
@@ -100,11 +112,7 @@
             <field name="model">client.fiche</field>
             <field name="arch" type="xml">
                 <search string="Chercher un client">
-                    <!--                    <field name="name" filter_domain="['|',('name', 'ilike', self),-->
-                    <!--&lt;!&ndash;                                                     ('id_contrat', 'ilike', self)&ndash;&gt;-->
-                    <!--                                                     ]"/>-->
-                    <!--                    <field name="id_contrat"/>-->
-                    <field name="name"/>
+                   <field name="name"/>
                 </search>
             </field>
         </record>

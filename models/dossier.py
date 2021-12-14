@@ -13,6 +13,8 @@ class Topnet_dossier(models.Model):
     # id_contrat_related = fields.Char('Numero de contrat', related='email_pri.id_contrat')
     dossier_id = fields.Many2one('topnet.dossier', ondelete='set null', string="dossier", index=True)
 
+    raison_clt1 = fields.Many2one(comodel_name='client.fiche', string='raison')
+    raison_clt1_rel = fields.Char(string='Raison sociale', related='raison_clt1.raison')
 
     doc1 = fields.Image(string="Registre de commerce", max_width=90, max_height=90, verify_resolution=True, required=True)
     doc2 = fields.Image(string="CIN gérant", max_width=90, max_height=90, verify_resolution=True, required=True)

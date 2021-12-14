@@ -18,10 +18,18 @@ class Clients(models.Model):
         ('email_pri_uniq', 'unique(email_pri)', 'Email existe déja'),
     ]
 
+
+    # @api.model
+    # def create(self, vals):
+    #     if vals.get('id_abonnement', _('New')) == _('New'):
+    #         vals['id_abonnement'] = self.env['ir.sequence'].next_by_code('topnet.abonnement.sequence') or _('New')
+    #     result = super(Abonnements, self).create(vals)
+    #     return result
+
     @api.model
-    def create(self, vals):
+    def contrat(self, vals):
         if vals.get('id_contrat', _('New')) == _('New'):
-            vals['id_contrat'] = self.env['ir.sequence'].next_by_code('topnet.contrat.sequence') or _('New')
+            vals['id_contrat'] = self.env['ir.sequence'].next_by_code('topnet.client.code') or _('New')
         result = super(Clients, self).create(vals)
         return result
 
@@ -29,9 +37,13 @@ class Clients(models.Model):
                              index=True, default=lambda self: _('New'))
 
     user_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
-
     abonnements_ids = fields.One2many(comodel_name='abonnement', inverse_name='raison_clt', string="Abonnements")
     contrat_ids = fields.One2many(comodel_name='abonnement', inverse_name='contrat_clt', string="contrat")
+
+    dossiers_ids = fields.One2many(comodel_name='topnet.dossier', inverse_name='raison_clt1', string="Dossier")
+
+    rdvs_ids = fields.One2many(comodel_name='rdv', inverse_name='rdv_clt', string="Rendez-vous")
+
 
     role = fields.Char(string="role", default="Client")
     name = fields.Char(string="Nom et Prénom du gérant", track_visibility="always")
